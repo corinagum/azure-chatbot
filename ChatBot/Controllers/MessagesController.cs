@@ -37,6 +37,24 @@ namespace ChatBot
             return response;
         }
 
+        private async Task<string> GetStock(string strStock)
+        {
+            string strRet = string.Empty;
+            double? dblStock = await Yahoo.GetStockPriceAsync(strStock);
+            
+            //return our reply to the user
+            if (null == dblStock)
+            {
+                strRet = string.Format("Stock {0} doesn't appear to be valid", strStock.ToUpper());
+            }
+            else
+            {
+                strRet = string.Format("Stock: {0}, Value: {1}", strStock.ToUpper(), dblStock);
+            }
+            
+            return strRet;
+        }
+
         private Activity HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
@@ -57,14 +75,9 @@ namespace ChatBot
             }
             else if (message.Type == ActivityTypes.Typing)
             {
-                // Handle knowing tha the user is typing
+                // Handle knowing that the user is typing
             }
             else if (message.Type == ActivityTypes.Ping)
-            {
-                return message.CreateReply("Hello Botty McBotface!");
-            }
-
-            else if (message.Type == "BotAddedToConversation")
             {
                 return message.CreateReply("Hello Botty McBotface!");
             }
