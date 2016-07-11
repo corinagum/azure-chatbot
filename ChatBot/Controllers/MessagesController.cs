@@ -29,8 +29,8 @@ namespace ChatBot
                 //Activity reply = activity.CreateReply("hello botty mcbotface");
                 //await connector.Conversations.ReplyToActivityAsync(reply);
 
-                //Activity strStock = GetStock(activity.Text);
-                //await connector.Conversations.ReplyToActivityAsync(strStock);
+                string strStock = await GetStock(activity.Text);
+                connector.Conversations.ReplyToActivityAsync(strStock);
             }
             if (activity.Type == ActivityTypes.Ping)
             {
