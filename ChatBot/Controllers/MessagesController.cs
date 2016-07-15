@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ChatBot
 {
@@ -22,15 +23,22 @@ namespace ChatBot
             ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
             if (activity.Type == ActivityTypes.Message)
             {
-                // calculate something for us to return
-                //int length = (activity.Text ?? string.Empty).Length;
 
-                // return our reply to the user
-                //Activity reply = activity.CreateReply("hello botty mcbotface");
+                // stockLUIS luisAnswer = await LUISTypeParser.ParseUserInput(activity.Text);
+                // string answer = luisAnswer.entities[0].ToString();
+                
+                Task<stockLUIS> luisAnswer = LUISTypeParser.ParseUserInput(activity.Text);
+                stockLUIS answer = await luisAnswer;
+                string answerStr = luisAnswer.ToString();
+
+                Activity reply = activity.CreateReply(answerStr);
+                await connector.Conversations.ReplyToActivityAsync(reply);
+
+
+                //string strStock = await GetStock(activity.Text);
+                //Activity reply = activity.CreateReply(strStock);
                 //await connector.Conversations.ReplyToActivityAsync(reply);
 
-                string strStock = await GetStock(activity.Text);
-                connector.Conversations.ReplyToActivityAsync(strStock);
             }
             if (activity.Type == ActivityTypes.Ping)
             {
@@ -45,23 +53,9 @@ namespace ChatBot
             return response;
         }
 
-        private async Task<string> GetStock(string strStock)
-        {
-            string strRet = string.Empty;
-            double? dblStock = await Yahoo.GetStockPriceAsync(strStock);
-            
-            //return our reply to the user
-            if (null == dblStock)
-            {
-                strRet = string.Format("Stock {0} doesn't appear to be valid", strStock.ToUpper());
-            }
-            else
-            {
-                strRet = string.Format("Stock: {0}, Value: {1}", strStock.ToUpper(), dblStock);
-            }
-            
-            return strRet;
-        }
+
+
+
 
         private Activity HandleSystemMessage(Activity message)
         {
@@ -92,5 +86,25 @@ namespace ChatBot
 
             return null;
         }
+
+        private async Task<string> GetStock(string strStock)
+        {
+            string strRet = string.Empty;
+            double? dblStock = await Yahoo.GetStockPriceAsync(strStock);
+
+            //return our reply to the user
+            if (null == dblStock)
+            {
+                strRet = string.Format("Stock {0} doesn't appear to be valid", strStock.ToUpper());
+            }
+            else
+            {
+                strRet = string.Format("Stock: {0}, Value: {1}", strStock.ToUpper(), dblStock);
+            }
+
+            return strRet;
+        }
+
+
     }
 }
