@@ -1,8 +1,8 @@
 *Markdown file that explains database design and stored procedures for future use*
 
-##Database Design
+#Database Design
 
-#####Tables
+###Tables
 
 **Node**
 * id (Primary Key)
@@ -22,10 +22,10 @@
 * start_id (Foreign Key referencing Node table parent node)
 * end_id (Foreign Key referencing Node table child node)
 
-#####Notes
+###Notes
 * Reference table defines parent-child relationships between nodes. 
 
-##Procedures
+#Procedures
 
 1. AddNodeWithContent
  * *Used to insert a new node*
