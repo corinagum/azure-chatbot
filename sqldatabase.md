@@ -4,21 +4,21 @@
 
 ###Tables
 
-**Node**
+Node
 * id (Primary Key)
 * content (TEXT)
 * intent (Foreign Key referencing Intent table)
 * error_id (Foreign Key referencing Error table)
 
-**Intent**
+Intent
 * id (Primary Key)
 * content (TEXT)
 
-**Error**
+Error
 * id (Primary Key)
 * content (TEXT)
 
-**Reference**
+Reference
 * start_id (Foreign Key referencing Node table parent node)
 * end_id (Foreign Key referencing Node table child node)
 
