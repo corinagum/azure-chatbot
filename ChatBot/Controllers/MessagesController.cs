@@ -16,7 +16,6 @@ namespace ChatBot
     {
         /// <summary>
         /// POST: api/Messages
-        /// Receive a message from a user and reply to it
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
@@ -24,26 +23,11 @@ namespace ChatBot
             if (activity.Type == ActivityTypes.Message)
             {
 
-                // stockLUIS luisAnswer = await LUISTypeParser.ParseUserInput(activity.Text);
-                // string answer = luisAnswer.entities[0].ToString();
-                
                 Task<stockLUIS> luisAnswer = LUISTypeParser.ParseUserInput(activity.Text);
-                stockLUIS answer = await luisAnswer;
-                string answerStr = luisAnswer.ToString();
-
-                Activity reply = activity.CreateReply(answerStr);
+                Activity reply = activity.CreateReply(luisAnswer.ToString());
+                //string strAnswer = luisAnswer[0].ToString();
                 await connector.Conversations.ReplyToActivityAsync(reply);
 
-
-                //string strStock = await GetStock(activity.Text);
-                //Activity reply = activity.CreateReply(strStock);
-                //await connector.Conversations.ReplyToActivityAsync(reply);
-
-            }
-            if (activity.Type == ActivityTypes.Ping)
-            {
-                Activity reply = activity.CreateReply("YES YES I AM HERE.");
-                await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
             {
@@ -53,10 +37,7 @@ namespace ChatBot
             return response;
         }
 
-
-
-
-
+       
         private Activity HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
@@ -81,30 +62,11 @@ namespace ChatBot
             }
             else if (message.Type == ActivityTypes.Ping)
             {
-                return message.CreateReply("Hello Botty McBotface!");
+                //Handle ping
             }
 
             return null;
         }
-
-        private async Task<string> GetStock(string strStock)
-        {
-            string strRet = string.Empty;
-            double? dblStock = await Yahoo.GetStockPriceAsync(strStock);
-
-            //return our reply to the user
-            if (null == dblStock)
-            {
-                strRet = string.Format("Stock {0} doesn't appear to be valid", strStock.ToUpper());
-            }
-            else
-            {
-                strRet = string.Format("Stock: {0}, Value: {1}", strStock.ToUpper(), dblStock);
-            }
-
-            return strRet;
-        }
-
 
     }
 }

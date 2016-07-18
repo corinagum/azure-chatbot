@@ -10,6 +10,7 @@ namespace ChatBot
 {
     public class LUISTypeParser
     {
+
         public static async Task<stockLUIS> ParseUserInput(string strInput)
         {
             string strRet = string.Empty;
