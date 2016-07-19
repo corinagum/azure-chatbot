@@ -37,3 +37,42 @@ c:\users\v-laugon\documents\visual studio 2015\Projects\ChatBot\ChatBot\bin\zh-h
 c:\users\v-laugon\documents\visual studio 2015\Projects\ChatBot\ChatBot\obj\Debug\ChatBot.csprojResolveAssemblyReference.cache
 c:\users\v-laugon\documents\visual studio 2015\Projects\ChatBot\ChatBot\obj\Debug\Bot Application1.dll
 c:\users\v-laugon\documents\visual studio 2015\Projects\ChatBot\ChatBot\obj\Debug\Bot Application1.pdb
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Bot Application1.dll.config
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Bot Application1.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Bot Application1.pdb
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Autofac.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Chronic.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.Bot.Builder.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.Bot.Connector.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.IdentityModel.Protocol.Extensions.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.Rest.ClientRuntime.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Newtonsoft.Json.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.Net.Http.Formatting.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.Web.Http.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.Web.Http.WebHost.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Autofac.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.Bot.Builder.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.Bot.Connector.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.IdentityModel.Protocol.Extensions.pdb
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.IdentityModel.Protocol.Extensions.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.Rest.ClientRuntime.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\Newtonsoft.Json.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.Net.Http.Formatting.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.Web.Http.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\System.Web.Http.WebHost.xml
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\ar\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\en\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\es\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\fa\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\fr\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\ja\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\ru\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\obj\Debug\ChatBot.csprojResolveAssemblyReference.cache
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\obj\Debug\Bot Application1.dll
+C:\Users\v-bemier\Downloads\azure-chatbot\ChatBot\obj\Debug\Bot Application1.pdb

@@ -8,26 +8,21 @@ using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.Bot.Builder.Dialogs;
 
 namespace ChatBot
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        /// <summary>
-        /// POST: api/Messages
-        /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
             if (activity.Type == ActivityTypes.Message)
             {
 
-                Task<stockLUIS> luisAnswer = LUISTypeParser.ParseUserInput(activity.Text);
-                Activity reply = activity.CreateReply(luisAnswer.ToString());
-                //string strAnswer = luisAnswer[0].ToString();
-                await connector.Conversations.ReplyToActivityAsync(reply);
-
+                Task<supportLUIS> luisAnswer = LUISTypeParser.ParseUserInput(activity.Text);
+                await Conversation.SendAsync(activity, () => new NodeChatBot());
             }
             else
             {
