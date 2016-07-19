@@ -125,8 +125,6 @@
     </Compile>
     <Compile Include="luis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Weather.cs" />
-    <Compile Include="yahoo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

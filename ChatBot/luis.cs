@@ -14,7 +14,7 @@ namespace ChatBot
         public static async Task<stockLUIS> ParseUserInput(string strInput)
         {
             string strRet = string.Empty;
-            string strEscaped = Uri.EscapeDataString(strInput);
+            //string strEscaped = Uri.EscapeDataString(strInput);
 
             using (var client = new HttpClient())
             {
