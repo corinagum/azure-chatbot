@@ -6,7 +6,8 @@
 
 Node
 * id (Primary Key)
-* content (TEXT)
+* question (TEXT)
+* answer (TEXT)
 * intent (Foreign Key referencing Intent table)
 * error_id (Foreign Key referencing Error table)
 
