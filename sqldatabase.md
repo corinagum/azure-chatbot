@@ -20,8 +20,8 @@ Error
 * content (TEXT)
 
 Reference
-* start_id (Foreign Key referencing Node table parent node)
-* end_id (Foreign Key referencing Node table child node)
+* parent_id (Foreign Key referencing Node table parent node)
+* child_id (Foreign Key referencing Node table child node)
 
 ###Notes
 * Reference table defines parent-child relationships between nodes. 
@@ -35,7 +35,7 @@ Reference
 
 2. AddReference
  * *Used to add a different parent-child relationship between nodes; when a node already exists, but needs to be a child node of a different parent as well. Creates a new avenue in our graph structure.*
- * Saves Parent Node as a variable, saves Child Node as a different variable, and adds a row in the Reference table with these ids as start_id(parent) and end_id(new child node).
+ * Saves Parent Node as a variable, saves Child Node as a different variable, and adds a row in the Reference table with these ids as parent_id(parent) and child_id(new child node).
   * **Procedure**
 
 3. FindChildren
