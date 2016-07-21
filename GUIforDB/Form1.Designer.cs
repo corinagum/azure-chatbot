@@ -224,11 +224,11 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label9.Location = new System.Drawing.Point(26, 678);
+            this.label9.Location = new System.Drawing.Point(108, 678);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(136, 17);
+            this.label9.Size = new System.Drawing.Size(47, 17);
             this.label9.TabIndex = 27;
-            this.label9.Text = "Intent (if applicable):";
+            this.label9.Text = "Intent:";
             // 
             // IntentTextBox
             // 
@@ -446,7 +446,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(110, 648);
+            this.label7.Location = new System.Drawing.Point(103, 648);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 17);
             this.label7.TabIndex = 43;
@@ -485,7 +485,7 @@
             // 
             this.answerLabel.AutoSize = true;
             this.answerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.answerLabel.Location = new System.Drawing.Point(100, 623);
+            this.answerLabel.Location = new System.Drawing.Point(97, 623);
             this.answerLabel.Name = "answerLabel";
             this.answerLabel.Size = new System.Drawing.Size(58, 17);
             this.answerLabel.TabIndex = 50;

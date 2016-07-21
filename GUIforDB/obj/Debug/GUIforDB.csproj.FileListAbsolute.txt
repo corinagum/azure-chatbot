@@ -7,3 +7,12 @@ c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\De
 c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.csproj.GenerateResource.Cache
 c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.exe
 c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.pdb
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\bin\Debug\GUIforDB.exe.config
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\obj\Debug\GUIforDB.exe
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\obj\Debug\GUIforDB.pdb
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\bin\Debug\GUIforDB.exe
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\bin\Debug\GUIforDB.pdb
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\obj\Debug\GUIforDB.csprojResolveAssemblyReference.cache
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\obj\Debug\GUIforDB.Form1.resources
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\obj\Debug\GUIforDB.Properties.Resources.resources
+C:\Users\v-bemier\Documents\Visual Studio 2015\Projects\azure-chatbot\GUIforDB\obj\Debug\GUIforDB.csproj.GenerateResource.Cache
