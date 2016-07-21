@@ -1,0 +1,9 @@
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\bin\Debug\GUIforDB.exe.config
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\bin\Debug\GUIforDB.exe
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\bin\Debug\GUIforDB.pdb
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.csprojResolveAssemblyReference.cache
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.Form1.resources
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.Properties.Resources.resources
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.csproj.GenerateResource.Cache
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.exe
+c:\users\v-bemier\documents\visual studio 2015\Projects\GUIforDB\GUIforDB\obj\Debug\GUIforDB.pdb
