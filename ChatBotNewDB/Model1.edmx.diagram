@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59199a11ea924a208b423db8af7ccbc9" Name="Diagram1">
+        <EntityTypeShape EntityType="LeapChatBotDBModel.ErrorCode" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeapChatBotDBModel.Intent" Width="1.5" PointX="0.875" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeapChatBotDBModel.Node" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeapChatBotDBModel.Reference" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="LeapChatBotDBModel.FK__Node__ErrorcodeI__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="LeapChatBotDBModel.FK__Node__IntentID__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="LeapChatBotDBModel.FK__Reference__Child__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="LeapChatBotDBModel.FK__Reference__Paren__14270015" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

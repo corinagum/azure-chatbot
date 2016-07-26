@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeapChatBotDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ErrorCode">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ErrorMessage" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Intent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="IntentName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="LUISID" Type="varchar" MaxLength="255" />
+    <Property Name="LUISKey" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Node">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Question" Type="varchar" MaxLength="2000" />
+    <Property Name="Answer" Type="varchar" MaxLength="2000" />
+    <Property Name="IntentID" Type="int" />
+    <Property Name="ErrorcodeID" Type="int" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reference">
+    <Key>
+      <PropertyRef Name="ParentID" />
+      <PropertyRef Name="ChildID" />
+    </Key>
+    <Property Name="ParentID" Type="int" Nullable="false" />
+    <Property Name="ChildID" Type="int" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Node__ErrorcodeI__114A936A">
+    <End Role="ErrorCode" Type="Self.ErrorCode" Multiplicity="0..1" />
+    <End Role="Node" Type="Self.Node" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ErrorCode">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Node">
+        <PropertyRef Name="ErrorcodeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Node__IntentID__10566F31">
+    <End Role="Intent" Type="Self.Intent" Multiplicity="0..1" />
+    <End Role="Node" Type="Self.Node" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Intent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Node">
+        <PropertyRef Name="IntentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reference__Child__151B244E">
+    <End Role="Node" Type="Self.Node" Multiplicity="1" />
+    <End Role="Reference" Type="Self.Reference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Node">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Reference">
+        <PropertyRef Name="ChildID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reference__Paren__14270015">
+    <End Role="Node" Type="Self.Node" Multiplicity="1" />
+    <End Role="Reference" Type="Self.Reference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Node">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Reference">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddErrorCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ErrorCode" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="AddIntent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IntentName" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="AddNode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Question" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Answer" Type="varchar(max)" Mode="In" />
+    <Parameter Name="PreviousID" Type="int" Mode="In" />
+    <Parameter Name="NewID" Type="int" Mode="In" />
+    <Parameter Name="IntentID" Type="int" Mode="In" />
+    <Parameter Name="ErrorcodeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AddReference" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PreviousID" Type="int" Mode="In" />
+    <Parameter Name="NewID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllConnectedNodes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PreviousID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetNodeByErrorCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ErrorMessage" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetNodeByIntent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IntentName" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetNodeWithAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Answer" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="GetRoot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateNodeWithErrorCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NodeID" Type="int" Mode="In" />
+    <Parameter Name="ErrorcodeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateNodeWithIntent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NodeID" Type="int" Mode="In" />
+    <Parameter Name="IntentID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="LeapChatBotDBModelStoreContainer">
+    <EntitySet Name="ErrorCode" EntityType="Self.ErrorCode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Intent" EntityType="Self.Intent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Node" EntityType="Self.Node" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reference" EntityType="Self.Reference" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Node__ErrorcodeI__114A936A" Association="Self.FK__Node__ErrorcodeI__114A936A">
+      <End Role="ErrorCode" EntitySet="ErrorCode" />
+      <End Role="Node" EntitySet="Node" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Node__IntentID__10566F31" Association="Self.FK__Node__IntentID__10566F31">
+      <End Role="Intent" EntitySet="Intent" />
+      <End Role="Node" EntitySet="Node" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reference__Child__151B244E" Association="Self.FK__Reference__Child__151B244E">
+      <End Role="Node" EntitySet="Node" />
+      <End Role="Reference" EntitySet="Reference" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reference__Paren__14270015" Association="Self.FK__Reference__Paren__14270015">
+      <End Role="Node" EntitySet="Node" />
+      <End Role="Reference" EntitySet="Reference" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

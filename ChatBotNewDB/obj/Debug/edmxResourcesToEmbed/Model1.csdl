@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeapChatBotDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ErrorCode">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ErrorMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Node" Relationship="Self.FK__Node__ErrorcodeI__114A936A" FromRole="ErrorCode" ToRole="Node" />
+  </EntityType>
+  <EntityType Name="Intent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="IntentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LUISID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="LUISKey" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Node" Relationship="Self.FK__Node__IntentID__10566F31" FromRole="Intent" ToRole="Node" />
+  </EntityType>
+  <EntityType Name="Node">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="Answer" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ErrorCode" Relationship="Self.FK__Node__ErrorcodeI__114A936A" FromRole="Node" ToRole="ErrorCode" />
+    <NavigationProperty Name="Intent" Relationship="Self.FK__Node__IntentID__10566F31" FromRole="Node" ToRole="Intent" />
+    <NavigationProperty Name="Reference" Relationship="Self.FK__Reference__Child__151B244E" FromRole="Node" ToRole="Reference" />
+    <NavigationProperty Name="Reference1" Relationship="Self.FK__Reference__Paren__14270015" FromRole="Node" ToRole="Reference" />
+  </EntityType>
+  <EntityType Name="Reference">
+    <Key>
+      <PropertyRef Name="ParentID" />
+      <PropertyRef Name="ChildID" />
+    </Key>
+    <Property Name="ParentID" Type="Int32" Nullable="false" />
+    <Property Name="ChildID" Type="Int32" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Node" Relationship="Self.FK__Reference__Child__151B244E" FromRole="Reference" ToRole="Node" />
+    <NavigationProperty Name="Node1" Relationship="Self.FK__Reference__Paren__14270015" FromRole="Reference" ToRole="Node" />
+  </EntityType>
+  <Association Name="FK__Node__ErrorcodeI__114A936A">
+    <End Role="ErrorCode" Type="Self.ErrorCode" Multiplicity="0..1" />
+    <End Role="Node" Type="Self.Node" Multiplicity="*" />
+  </Association>
+  <Association Name="FK__Node__IntentID__10566F31">
+    <End Role="Intent" Type="Self.Intent" Multiplicity="0..1" />
+    <End Role="Node" Type="Self.Node" Multiplicity="*" />
+  </Association>
+  <Association Name="FK__Reference__Child__151B244E">
+    <End Role="Node" Type="Self.Node" Multiplicity="1" />
+    <End Role="Reference" Type="Self.Reference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Node">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Reference">
+        <PropertyRef Name="ChildID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reference__Paren__14270015">
+    <End Role="Node" Type="Self.Node" Multiplicity="1" />
+    <End Role="Reference" Type="Self.Reference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Node">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Reference">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LeapChatBotDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ErrorCode" EntityType="Self.ErrorCode" />
+    <EntitySet Name="Intent" EntityType="Self.Intent" />
+    <EntitySet Name="Node" EntityType="Self.Node" />
+    <EntitySet Name="Reference" EntityType="Self.Reference" />
+    <AssociationSet Name="FK__Node__ErrorcodeI__114A936A" Association="Self.FK__Node__ErrorcodeI__114A936A">
+      <End Role="ErrorCode" EntitySet="ErrorCode" />
+      <End Role="Node" EntitySet="Node" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Node__IntentID__10566F31" Association="Self.FK__Node__IntentID__10566F31">
+      <End Role="Intent" EntitySet="Intent" />
+      <End Role="Node" EntitySet="Node" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reference__Child__151B244E" Association="Self.FK__Reference__Child__151B244E">
+      <End Role="Node" EntitySet="Node" />
+      <End Role="Reference" EntitySet="Reference" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reference__Paren__14270015" Association="Self.FK__Reference__Paren__14270015">
+      <End Role="Node" EntitySet="Node" />
+      <End Role="Reference" EntitySet="Reference" />
+    </AssociationSet>
+    <FunctionImport Name="AddErrorCode">
+      <Parameter Name="ErrorCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddIntent">
+      <Parameter Name="IntentName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNode">
+      <Parameter Name="Question" Mode="In" Type="String" />
+      <Parameter Name="Answer" Mode="In" Type="String" />
+      <Parameter Name="PreviousID" Mode="In" Type="Int32" />
+      <Parameter Name="NewID" Mode="In" Type="Int32" />
+      <Parameter Name="IntentID" Mode="In" Type="Int32" />
+      <Parameter Name="ErrorcodeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddReference">
+      <Parameter Name="PreviousID" Mode="In" Type="Int32" />
+      <Parameter Name="NewID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetAllConnectedNodes" ReturnType="Collection(LeapChatBotDBModel.GetAllConnectedNodes_Result)">
+      <Parameter Name="PreviousID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetNodeByErrorCode" ReturnType="Collection(LeapChatBotDBModel.GetNodeByErrorCode_Result)">
+      <Parameter Name="ErrorMessage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetNodeByIntent" ReturnType="Collection(LeapChatBotDBModel.GetNodeByIntent_Result)">
+      <Parameter Name="IntentName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetNodeWithAnswer" ReturnType="Collection(LeapChatBotDBModel.GetNodeWithAnswer_Result)">
+      <Parameter Name="Answer" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetRoot" ReturnType="Collection(LeapChatBotDBModel.GetRoot_Result)" />
+    <FunctionImport Name="UpdateNodeWithErrorCode">
+      <Parameter Name="NodeID" Mode="In" Type="Int32" />
+      <Parameter Name="ErrorcodeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateNodeWithIntent">
+      <Parameter Name="NodeID" Mode="In" Type="Int32" />
+      <Parameter Name="IntentID" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAllConnectedNodes_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="Answer" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <ComplexType Name="GetNodeByErrorCode_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="Answer" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <ComplexType Name="GetNodeByIntent_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="Answer" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <ComplexType Name="GetNodeWithAnswer_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="Answer" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+  <ComplexType Name="GetRoot_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="Answer" Nullable="true" MaxLength="2000" />
+  </ComplexType>
+</Schema>
