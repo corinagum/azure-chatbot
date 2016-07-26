@@ -198,6 +198,8 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\azuresupportchatbot - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ChatBotNewDB20160726023146 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

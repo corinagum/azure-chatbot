@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LeapChatBotDBModelStoreContainer" CdmEntityContainer="LeapChatBotDBEntities">
+    <EntitySetMapping Name="ErrorCode">
+      <EntityTypeMapping TypeName="LeapChatBotDBModel.ErrorCode">
+        <MappingFragment StoreEntitySet="ErrorCode">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Intent">
+      <EntityTypeMapping TypeName="LeapChatBotDBModel.Intent">
+        <MappingFragment StoreEntitySet="Intent">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IntentName" ColumnName="IntentName" />
+          <ScalarProperty Name="LUISID" ColumnName="LUISID" />
+          <ScalarProperty Name="LUISKey" ColumnName="LUISKey" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Node">
+      <EntityTypeMapping TypeName="LeapChatBotDBModel.Node">
+        <MappingFragment StoreEntitySet="Node">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reference">
+      <EntityTypeMapping TypeName="LeapChatBotDBModel.Reference">
+        <MappingFragment StoreEntitySet="Reference">
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="ChildID" ColumnName="ChildID" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK__Node__ErrorcodeI__114A936A" TypeName="LeapChatBotDBModel.FK__Node__ErrorcodeI__114A936A" StoreEntitySet="Node">
+      <EndProperty Name="ErrorCode">
+        <ScalarProperty Name="ID" ColumnName="ErrorcodeID" />
+      </EndProperty>
+      <EndProperty Name="Node">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="ErrorcodeID" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__Node__IntentID__10566F31" TypeName="LeapChatBotDBModel.FK__Node__IntentID__10566F31" StoreEntitySet="Node">
+      <EndProperty Name="Intent">
+        <ScalarProperty Name="ID" ColumnName="IntentID" />
+      </EndProperty>
+      <EndProperty Name="Node">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="IntentID" />
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="AddErrorCode" FunctionName="LeapChatBotDBModel.Store.AddErrorCode" />
+    <FunctionImportMapping FunctionImportName="AddIntent" FunctionName="LeapChatBotDBModel.Store.AddIntent" />
+    <FunctionImportMapping FunctionImportName="AddNode" FunctionName="LeapChatBotDBModel.Store.AddNode" />
+    <FunctionImportMapping FunctionImportName="AddReference" FunctionName="LeapChatBotDBModel.Store.AddReference" />
+    <FunctionImportMapping FunctionImportName="GetAllConnectedNodes" FunctionName="LeapChatBotDBModel.Store.GetAllConnectedNodes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeapChatBotDBModel.GetAllConnectedNodes_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetNodeByErrorCode" FunctionName="LeapChatBotDBModel.Store.GetNodeByErrorCode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeapChatBotDBModel.GetNodeByErrorCode_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetNodeByIntent" FunctionName="LeapChatBotDBModel.Store.GetNodeByIntent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeapChatBotDBModel.GetNodeByIntent_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetNodeWithAnswer" FunctionName="LeapChatBotDBModel.Store.GetNodeWithAnswer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeapChatBotDBModel.GetNodeWithAnswer_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetRoot" FunctionName="LeapChatBotDBModel.Store.GetRoot">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeapChatBotDBModel.GetRoot_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateNodeWithErrorCode" FunctionName="LeapChatBotDBModel.Store.UpdateNodeWithErrorCode" />
+    <FunctionImportMapping FunctionImportName="UpdateNodeWithIntent" FunctionName="LeapChatBotDBModel.Store.UpdateNodeWithIntent" />
+  </EntityContainerMapping>
+</Mapping>
