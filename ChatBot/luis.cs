@@ -39,7 +39,7 @@ namespace ChatBot
         public object[] entities { get; set; }
     }
 
-    public class Intent
+    public partial class Intent
     {
         public string intent { get; set; }
         public float score { get; set; }

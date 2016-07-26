@@ -11,9 +11,12 @@ namespace ChatBot
     class NodeChatBot : IDialog<object>
     {
 
-        Node test = new Node() { question = "You chose SSH connectivity issues, which deployment model did you use?", answers = new Dictionary<int, string> { { 1, "Resource" }, { 2, "Classic" } } };
-
-
+        //Node currentNode = new Node() { Question = "You chose SSH connectivity issues, which deployment model did you use?", Answer = "Answer" };
+        //string[] options = new string[] { "option1", "option2" };
+        Node currentNode = new Node();
+        List<Node> nodeList = new List<Node>();
+        //List<string> options = new List<string>() { "option1", "option2" };
+        List<string> options = new List<string>();
         string description;
 
         public async Task StartAsync(IDialogContext context)
@@ -26,45 +29,82 @@ namespace ChatBot
             var message = await argument;
             //await context.PostAsync(message.Text);
 
-            supportLUIS luisAnswer = await LUISTypeParser.ParseUserInput(message.Text);
-            var intent = luisAnswer.intents[0].intent;
+            //supportLUIS luisAnswer = await LUISTypeParser.ParseUserInput(message.Text);
+            //var intent = luisAnswer.intents[0].intent;
             //Query DB using LUIS intent, return relevant root node
+
+            using (var db = new SampleDBEntities())
+            {
+                var query = from c in db.Node
+                            where c.id == 5
+                            select c;
+                foreach (var item in query)
+                {
+                    currentNode.id = item.id;
+                    currentNode.Question = item.Question;
+                    currentNode.Answer = item.Answer;
+                    currentNode.Luis_id = item.Luis_id;
+                    currentNode.Luis_key = item.Luis_key;
+                }
+
+                var results = db.GetAllConnectedNodes(currentNode.id).ToList();
+                results.ForEach(x => options.Add(x.Answer));
+                foreach(var item in results)
+                {
+                    Node n = new Node();
+                    n.id = item.id;
+                    n.Question = item.Question;
+                    n.Answer = item.Answer;
+                    nodeList.Add(n);
+                }
+
+
+            }
+
 
             PromptDialog.Choice(
                 context: context,
                 resume: ResumeAndPromptPlatformAsync,
-                options: test.answers.Values.ToArray(),
-                prompt: "Welcome to Azure Support bot! " + test.question,
+                options: options.ToArray(),
+                prompt: "Welcome to Azure Support bot! " + currentNode.Question,
                 retry: "I didn't understand. Please try again.");
         }
 
         public async Task ResumeAndPromptPlatformAsync(IDialogContext context, IAwaitable<string> argument)
         {
-            int id = 0;
-            var reply = await argument;
-            foreach (var key in test.answers.Keys)
+            var message = await argument;
+            foreach (var node in nodeList)
             {
-                if (test.answers[key] == reply)
-                    id = key;
+                if (node.Answer == message)
+                    currentNode = node;
             }
             //Given the answer, use it's ID from above to query for the related node
             //Convert DB reply into Node structure
 
-            Node test1 = new Node() { question = @"'You can reset credentials or SSHD using either Azure CLI commands directly or using the Azure VM Access for Linux extension. 
-                How would you like to resolve the issue?'", answers = new Dictionary<int, string> { { 1, "First answer" }, { 2, "Second answer" }, { 3, "Third answer" }, { 4, "error code" }, { 5, "human" } } };
+            using (var db = new SampleDBEntities())
+            {
+                var results = db.GetAllConnectedNodes(currentNode.id).ToList();
 
-            Node test2 = new Node() { question = @"'Reset SSHD 
-The SSHD configuration itself may be misconfigured or the service encountered an error. You can reset SSHD to make sure the SSH configuration itself is valid.'", answers = new Dictionary<int, string> { { 1, "Blah" }, { 2, "Blah blah" }, { 3, "Blah blah blah" } } };
+                nodeList.Clear();
+                options.Clear();
+                foreach (var item in results)
+                {
+                    Node n = new Node();
+                    n.id = item.id;
+                    n.Question = item.Question;
+                    n.Answer = item.Answer;
+                    nodeList.Add(n);
+                }
+                nodeList.ForEach(x => options.Add(x.Answer));
 
-            test = id == 1 ? test1 : test2;
-
+            }
                 PromptDialog.Choice(
-                        context: context,
-                        resume: ResumeAndPromptPlatformAsync,
-                        options: test.answers.Values.ToArray(),
-                        prompt: test.question,
-                        retry: "I didn't understand. Please try again.");
-            
+                    context: context,
+                    resume: ResumeAndPromptPlatformAsync,
+                    options: options.ToArray(),
+                    prompt: currentNode.Question,
+                    retry: "I didn't understand. Please try again.");
+
         }
 
         public async Task ResumeAndPromptDescriptionAsync(IDialogContext context, IAwaitable<string> argument)
