@@ -5,6 +5,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System.Collections.Generic;
 using ChatBotNewDB;
+using System.Diagnostics;
 
 namespace ChatBot
 {
