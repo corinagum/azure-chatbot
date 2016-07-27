@@ -1,0 +1,163 @@
+
+* {
+  border: 1px solid black;
+}
+/* GLOBAL STYLES
+-----------------------------------------*/
+html,
+body {
+  height: 100%;
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  color: #333333; /* dark, almost black, gray colour */
+}
+h1,
+h2 {
+  font-family: "Nixie One", serif;
+  /*font-weight: 300;  removes default bold styles */
+  text-transform: uppercase;
+  margin: 0; /* removes default space */
+}
+a {
+  color: white;
+  text-decoration: none; /* removes default underline */
+}
+a:hover {
+  color: #29A5DE;   /* blue */
+  /* background: rgba(255, 255, 255, 0.3); */
+}
+header,
+main,
+nav {
+  padding: 20px 30px;
+}
+main {
+  clear: both;
+  height: 470px;
+}
+.highlight {
+  color: blue;     /* blue */
+}
+
+
+/* HEADER STYLES
+-----------------------------------------*/
+header {
+    background-color: #1a1a1a;   /* near black */
+    color: #fff;
+    display: block;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    /* position: relative; */
+    /* z-index: 9999; */
+}
+
+header h1 {
+  font-size: 24px;
+}
+header h2 {
+  font-size: 24px;
+}
+header {
+  float: left;
+}
+nav {
+  float: right;
+}
+nav a {
+  padding: 20px;
+}
+
+/* HOME PAGE STYLES
+-----------------------------------------*/ 
+.home {
+  /*background: url(../images/background-6.jpg) no-repeat 50%;*/
+  background-size: cover;
+  background-color: lightblue;   
+}
+
+/* ABOUT STYLES
+-----------------------------------------*/
+.about {
+  background-color: lightblue;  
+}
+
+.profile-img {
+  float: left;
+  margin-right: 20px;
+  width: 50%;
+}
+
+
+/* CONTACT STYLES
+-----------------------------------------*/
+.contact {
+   background-color: lightblue;
+
+  /*
+  background: url(../images/mt-baker.jpg) no-repeat 50%;
+  background-size: cover;
+  */
+}
+.contact main {
+  background: rgba(255, 255, 255);
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.contact main h1 {
+  text-transform: none;
+}
+
+/* form styles */
+form {
+  border: 1px solid black;
+  height: 400px;
+  width: 400px;
+}
+input,
+textarea {
+  border: 1px solid #BF6D50;
+  width: 400px;
+  margin-bottom: 10px;
+}
+input {
+  height: 20px;
+} 
+textarea {
+  height: 100px;
+}
+button {
+  background: #BF6D50;
+  border: none;
+  padding: 10px 40px;
+  font-size: 16px;
+}
+
+
+/* FOOTER STYLES
+-----------------------------------------*/
+/* Sticky Footer - http://css-tricks.com/snippets/css/sticky-footer */
+.page-wrap {
+  background-color: rgb(26,26,26);  /* near black */
+  min-height: 100%
+  margin-bottom: -55px; /* must be the same height as footer */
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+footer, 
+.page-wrap:after {
+  height: 55px; /* however tall you want the footer to be */
+}
+footer {
+  background-color: #333333;
+  color: white;
+  /* background: rgba(255, 255, 255, 0.8);  fix */
+  text-align: center;
+  padding: 1px;
+  text-transform: lowercase;
+}
