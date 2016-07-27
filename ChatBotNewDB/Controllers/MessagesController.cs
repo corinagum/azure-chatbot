@@ -9,6 +9,7 @@ using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Bot.Builder.Dialogs;
+using ChatBotNewDB;
 
 namespace ChatBot
 {
@@ -23,12 +24,12 @@ namespace ChatBot
             {
                 if (activity.Text == "help")
                 {
-                    Activity reply = activity.CreateReply("You may type commands such as back, human, or error code if you have a code to paste in. To return, select an answer from the previous message.'");
+                    Activity reply = activity.CreateReply("You may type commands such as back, restart, human, or error code if you have a code to paste in. To return, select an answer from the previous message.'");
                     await connector.Conversations.ReplyToActivityAsync(reply);
                 }
-                else if (activity.Text == "back")
+                else if (activity.Text == "restart")
                 {
-                    //Code to query the DB for the parent node
+                    //Code to start back at the first node
                 }
                 else if (activity.Text == "human")
                 {

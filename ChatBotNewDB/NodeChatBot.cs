@@ -5,6 +5,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System.Collections.Generic;
 using ChatBotNewDB;
+using System.Diagnostics;
 
 namespace ChatBot
 {
@@ -12,8 +13,9 @@ namespace ChatBot
     class NodeChatBot : IDialog<object>
     {
 
-        Node currentNode = new Node();
-        List<Node> nodeList = new List<Node>();
+        Node2 currentNode = new Node2();
+        List<Node2> nodeList = new List<Node2>();
+        List<Node2> nodeSession = new List<Node2>();
         List<string> options = new List<string>();
 
         public async Task StartAsync(IDialogContext context)
@@ -38,12 +40,13 @@ namespace ChatBot
                     currentNode.Question = item.Question;
                     currentNode.Answer = item.Answer;
                 }
+                nodeSession.Add(currentNode);
 
                 var results = db.GetAllConnectedNodes(currentNode.ID).ToList();
                 results.ForEach(x => options.Add(x.Answer));
                 foreach (var item in results)
                 {
-                    Node n = new Node();
+                    Node2 n = new Node2();
                     n.ID = item.ID;
                     n.Question = item.Question;
                     n.Answer = item.Answer;
@@ -62,10 +65,37 @@ namespace ChatBot
         public async Task ResumeAndPromptPlatformAsync(IDialogContext context, IAwaitable<string> argument)
         {
             var message = await argument;
-            foreach (var node in nodeList)
+            if(message=="Go Back")
             {
-                if (node.Answer == message)
-                    currentNode = node;
+                nodeSession.RemoveAt(nodeSession.Count - 1);
+                currentNode = nodeSession.Last();
+            }
+            else if(message=="Start Over")
+            {
+                currentNode = nodeSession.First();
+                nodeSession.RemoveRange(1, nodeSession.Count - 2);
+            }
+            else if (message == "Continue") {}
+            else
+            {
+                foreach (var node in nodeList)
+                {
+                    if (node.Answer == message)
+                        currentNode = node;
+                }
+                nodeSession.Add(currentNode);
+            }
+            for (int i = 1; i < nodeSession.Count - 1; i++)
+            {
+                if ((nodeSession[nodeSession.Count - 2] == nodeSession[i - 1] && currentNode.ID == nodeSession[i].ID) && nodeSession.IndexOf(nodeSession[nodeSession.Count - 2]) != nodeSession.IndexOf(nodeSession[i - 1]))
+                {
+                    PromptDialog.Choice(
+                        context: context,
+                        resume: ResumeAndPromptPlatformAsync,
+                        options: new string[] { "Go Back", "Continue", "Start Over" },
+                        prompt: "It looks like you hit a loop, what would you like to do?",
+                        retry: "I didn't understand. Please try again.");
+                }
             }
 
             using (var db = new LeapChatBotDBEntities())
@@ -76,15 +106,15 @@ namespace ChatBot
                 options.Clear();
                 foreach (var item in results)
                 {
-                    Node n = new Node();
+                    Node2 n = new Node2();
                     n.ID = item.ID;
                     n.Question = item.Question;
                     n.Answer = item.Answer;
                     nodeList.Add(n);
                 }
                 nodeList.ForEach(x => options.Add(x.Answer));
-
             }
+            options.Add("Go Back");
             PromptDialog.Choice(
                 context: context,
                 resume: ResumeAndPromptPlatformAsync,
