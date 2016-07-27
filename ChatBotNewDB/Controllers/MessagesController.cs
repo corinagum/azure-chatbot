@@ -27,14 +27,6 @@ namespace ChatBot
                     Activity reply = activity.CreateReply("You may type commands such as back, restart, human, or error code if you have a code to paste in. To return, select an answer from the previous message.'");
                     await connector.Conversations.ReplyToActivityAsync(reply);
                 }
-                else if (activity.Text == "back")
-                {
-                    //Code to query the DB for the parent node
-                }
-                else if (activity.Text == "restart")
-                {
-                    //Code to start back at the first node
-                }
                 else if (activity.Text == "human")
                 {
                     Activity reply = activity.CreateReply("I'm sorry I couldn't help you solve your problem. You will be connected to a human momentarily.");

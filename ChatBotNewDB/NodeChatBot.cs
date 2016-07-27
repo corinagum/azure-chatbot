@@ -17,6 +17,11 @@ namespace ChatBot
         List<Node> nodeList = new List<Node>();
         List<string> options = new List<string>();
 
+        // Create list to hold the Nodes user has chosen
+        List<Node> chatHistory = new List<Node>();
+        // Pointer to keep track of the current index in the chatHistory list 
+        int historyPointer;
+
         public async Task StartAsync(IDialogContext context)
         {
             context.Wait(ConversationStartedAsync);
@@ -39,6 +44,11 @@ namespace ChatBot
                     currentNode.Question = item.Question;
                     currentNode.Answer = item.Answer;
                 }
+
+                // Add first node to chat history list
+                chatHistory.Add(currentNode);
+                // Initialize historyPointer to 0
+                historyPointer = 0;
 
                 var results = db.GetAllConnectedNodes(currentNode.ID).ToList();
                 results.ForEach(x => options.Add(x.Answer));
@@ -63,11 +73,29 @@ namespace ChatBot
         public async Task ResumeAndPromptPlatformAsync(IDialogContext context, IAwaitable<string> argument)
         {
             var message = await argument;
-            foreach (var node in nodeList)
+
+            if (message.ToLower() == "back")
             {
-                if (node.Answer == message)
-                    currentNode = node;
+                currentNode = chatHistory[historyPointer - 1];
+                historyPointer -= 1;
             }
+            else if (message.ToLower() == "restart")
+            {
+                currentNode = chatHistory[0];
+                historyPointer = 0;
+            } else
+            {
+                foreach (var node in nodeList)
+                {
+                    if (node.Answer == message)
+                        currentNode = node;
+                }
+                // Add current node to the list containing chat history
+                chatHistory.Add(currentNode);
+                // Increment 
+                historyPointer += 1;
+            }
+
 
             using (var db = new LeapChatBotDBEntities())
             {
