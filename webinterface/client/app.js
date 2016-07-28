@@ -178,14 +178,13 @@ function restart() {
       else selected_node = mousedown_node;
       selected_link = null;
       var infodiv = document.getElementById('info_div');
-
-      infodiv.innerHTML = "<div id='node_div'></div>";
-
-      var nodediv = document.getElementById('node_div');
-      nodediv.innerHTML = "<h1> Node " + mousedown_node.id + "</h1>";
-      // infodiv.innerHTML = "<form>ID: <input type='text' value=" + mousedown_node.id + "></br>Question: <input type='text' value=" + mousedown_node.question + "></br>Answer: <input type='text' value=" + mousedown_node.answer + "></form>";
-      infodiv.innerHTML += "<h2>Question </br></h2><p>" + mousedown_node.question + "</p></h2><h2>Answer </br></h2><p>" + mousedown_node.answer + "</p><h2># Children </br></h2><p>" + mousedown_node.numchildren + "</p>";
-      //this is where want to do something with the mousedown_node. Console logging the object returns its location as well as dummy question successfully. We need to create a modal here that pops out with this 
+      infodiv.innerHTML = "<div class='panel panel-default'><div id='panel_heading' class='panel-heading'></div><div id='panel_body'class='panel-body'></div><div id='panel_footer' class='panel-footer'></div></div>";
+      var panelheader = document.getElementById('panel_heading');
+      var panelbody = document.getElementById('panel_body');
+      var panelfooter = document.getElementById('panel_footer');
+      panelheader.innerHTML = "<h1> Node " + mousedown_node.id + "</h1>";
+      panelbody.innerHTML += "<h2>Question </br></h2><p>" + mousedown_node.question + "</p></h2><h2>Answer </br></h2><p>" + mousedown_node.answer + "</p><h2># Children </br></h2><p>" + mousedown_node.numchildren + "</p>";
+      panelfooter.innerHTML += "<button type='button' onClick='editPanel()'class='btn btn-info'>Edit</button>";
       infodiv.style.visibility = "visible";
       // reposition drag line
       drag_line
