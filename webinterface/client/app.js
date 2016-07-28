@@ -193,7 +193,7 @@ function restart() {
       console.log(mousedown_node);
 
       var infodiv = document.getElementById('info_div');
-      infodiv.innerHTML += "hello";
+      infodiv.innerHTML = "<form>ID: <input type='text' value=" + mousedown_node.id + "></br>Question: <input type='text' value=" + mousedown_node.question + "></br>Answer: <input type='text' value=" + mousedown_node.answer + "></form>";
       //this is where want to do something with the mousedown_node. Console logging the object returns its location as well as dummy question successfully. We need to create a modal here that pops out with this 
       
       // reposition drag line
