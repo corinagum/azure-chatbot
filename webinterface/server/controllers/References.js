@@ -2,7 +2,7 @@ var sql = require("seriate")
 
 module.exports = {
     
-  // Get all appointments from the database
+  // Get all references from database 
   index: function(req, res) {
     sql.execute( {
         name: "selectFromReference",
@@ -14,5 +14,39 @@ module.exports = {
     }, function( err ) {
         console.log( err );
     });
+  },
+
+  // Create a new reference between two nodes
+  create: function(req, res) {
+      sql.execute({
+          procedure: "AddReference",
+          params: {
+              parentID: {
+                  type: sql.INT,
+                  val: req.params.parentID
+              },
+              chileID: {
+                  type: sql.INT,
+                  val: req.params.childID
+              } 
+          }
+      })
+  },
+  
+  // Remove a reference
+  delete: function(req, res) {
+      sql.execute({
+          procedure: "DeleteReference",
+          params: {
+              parentID: {
+                  type: sql.INT,
+                  val: req.params.parentID
+              },
+              chileID: {
+                  type: sql.INT,
+                  val: req.params.childID
+              }        
+          }
+      })
   }
 }
