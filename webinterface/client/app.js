@@ -14,9 +14,10 @@ var links = [];
 var lastNodeId = 0;
 
 d3.json("http://localhost:8000/Nodes", function(data) {
+  console.log(data);
     for (var idx in data) {
         var row = data[idx];
-        nodes.push({ id: row.ID, reflexive: true });
+        nodes.push({ id: row.ID, reflexive: true, question: row.Question, answer: row.Answer });
         lastNodeId++;
     }
     restart();
@@ -266,7 +267,7 @@ function mousedown() {
 
   // insert new node at point
   var point = d3.mouse(this),
-      node = {id: ++lastNodeId, reflexive: false, question:"Question " + lastNodeId, answer:"Answer " + lastNodeId, numchildren:5};
+      node = {id: ++lastNodeId, reflexive: false, question:"Question " + lastNodeId, answer:"Answer " + lastNodeId};
   node.x = point[0];
   node.y = point[1];
   nodes.push(node);
