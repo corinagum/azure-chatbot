@@ -12,6 +12,7 @@ var svg = d3.select('#svg_div')
 var nodes = [];
 var links = [];
 var lastNodeId = 0;
+var didSelectNode = false;
 
 d3.json("http://localhost:8000/Nodes", function(data) {
   console.log(data);
@@ -169,6 +170,7 @@ function restart() {
       d3.select(this).attr('transform', '');
     })
     .on('mousedown', function(d) {
+      didSelectNode = true;
       if (d3.event.ctrlKey) return;
       // select node
       mousedown_node = d;
@@ -258,9 +260,13 @@ function mousedown() {
   // prevent I-bar on drag
   //d3.event.preventDefault();
   // because :active only works in WebKit?
-  var idlabel = document.getElementById('id_label');
-  idlabel.innerHTML = "ID: " + (lastNodeId + 1);
-  $('#myModal').modal('show');
+  console.log(didSelectNode);
+  if (didSelectNode == false){
+      var idlabel = document.getElementById('id_label');
+    idlabel.innerHTML = "ID: " + (lastNodeId + 1);
+    $('#myModal').modal('show');
+  }
+  didSelectNode = false;
   svg.classed('active', true);
 
   if(d3.event.ctrlKey || mousedown_node || mousedown_link) return;
