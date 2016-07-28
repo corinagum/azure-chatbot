@@ -16,11 +16,11 @@ d3.json("http://localhost:8000/Nodes", function(data) {
 //  - nodes are known by 'id', not by index in array.
 //  - reflexive edges are indicated on the node (as a bold black circle).
 //  - links are always source < target; edge directions are set by 'left' and 'right'.
-
+    console.log(data);
     for (var idx in data) {
         var row = data[idx];
         console.log(row);
-        nodes.push({ id: row.ID, reflexive: true });
+        nodes.push({ id: row.ID, reflexive: true});
 
         if (row.StartID) {
 
@@ -36,8 +36,8 @@ d3.json("http://localhost:8000/Nodes", function(data) {
             console.log("==========================")
             console.log()
             }
-        lastNodeId++;
     }
+    lastNodeId = nodes[nodes.length-1].id;
     links.push({ source: nodes[0], target: nodes[1], left: false, right: true })
     links.push({ source: nodes[0], target: nodes[2], left: false, right: true })
     links.push({ source: nodes[0], target: nodes[3], left: false, right: true })
@@ -180,15 +180,12 @@ function restart() {
       d3.select(this).attr('transform', '');
     })
     .on('mousedown', function(d) {
-
       if (d3.event.ctrlKey) return;
       // select node
       mousedown_node = d;
       if (mousedown_node === selected_node) selected_node = null;
       else selected_node = mousedown_node;
       selected_link = null;
-      console.log(mousedown_node);
-
       var infodiv = document.getElementById('info_div');
 
       infodiv.innerHTML = "<div id='node_div'></div>";
@@ -271,8 +268,10 @@ function restart() {
 function mousedown() {
   // prevent I-bar on drag
   //d3.event.preventDefault();
-
   // because :active only works in WebKit?
+  var idlabel = document.getElementById('id_label');
+  idlabel.innerHTML = "ID: " + (lastNodeId + 1);
+  $('#myModal').modal('show');
   svg.classed('active', true);
 
   if(d3.event.ctrlKey || mousedown_node || mousedown_link) return;
@@ -285,6 +284,7 @@ function mousedown() {
   nodes.push(node);
 
   restart();
+
 }
 
 function mousemove() {
