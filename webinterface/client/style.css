@@ -10,9 +10,17 @@ svg {
   user-select: none;
 }
 #info_div {
-  width: 280px;
+  width: 300px;
   height: 600px;
   border: 1px solid lightgrey;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-family: georgia;
+}
+#svg_div {
+  width: 900px;
+  height: 600px;
   display: inline-block;
   vertical-align: top;
   text-align: center;

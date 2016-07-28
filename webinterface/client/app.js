@@ -1,8 +1,8 @@
-var width  = 960,
+var width  = 900,
     height = 600,
     colors = d3.scale.category10();
 
-var svg = d3.select('body')
+var svg = d3.select('#svg_div')
   .append('svg')
   .attr('oncontextmenu', 'return false;')
   .attr('width', width)
@@ -35,16 +35,13 @@ d3.json("http://localhost:8000/Nodes", function(data) {
             console.log(links);
             console.log("==========================")
             console.log()
-            links.push({ source:source, target: target, left: false, right: true })
-
-            links.push({ source: nodes[0], target: nodes[lastNodeId], left: false, right: true })
-        }
+            }
         lastNodeId++;
     }
     links.push({ source: nodes[0], target: nodes[1], left: false, right: true })
     links.push({ source: nodes[0], target: nodes[2], left: false, right: true })
     links.push({ source: nodes[0], target: nodes[3], left: false, right: true })
-
+    restart();
 });
 // init D3 force layout
 var force = d3.layout.force()

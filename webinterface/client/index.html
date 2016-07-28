@@ -5,6 +5,10 @@
     <title>Directed Graph Editor</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript">
     $( document ).ready(function() {
         $("#info_div").css("visibility", "hidden");
@@ -14,8 +18,12 @@
   </head>
   
   <body>
-  		<script src="http://d3js.org/d3.v3.min.js"></script>
-  		<script src="app.js"></script>
-  	<div id="info_div"></div>
+    <div id="main_container" class="container-fluid">
+      <div id="svg_div" class="container">
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="app.js"></script>
+      </div>
+  	  <div id="info_div" class="container"></div>
+    </div>
   </body>
 </html>
