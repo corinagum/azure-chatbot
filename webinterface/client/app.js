@@ -193,7 +193,12 @@ function restart() {
       console.log(mousedown_node);
 
       var infodiv = document.getElementById('info_div');
-      infodiv.innerHTML = "<form>ID: <input type='text' value=" + mousedown_node.id + "></br>Question: <input type='text' value=" + mousedown_node.question + "></br>Answer: <input type='text' value=" + mousedown_node.answer + "></form>";
+      infodiv.innerHTML = "<div id='node_div'></div>";
+
+      var nodediv = document.getElementById('node_div');
+      nodediv.innerHTML = "<h1> Node " + mousedown_node.id + "</h1>";
+      // infodiv.innerHTML = "<form>ID: <input type='text' value=" + mousedown_node.id + "></br>Question: <input type='text' value=" + mousedown_node.question + "></br>Answer: <input type='text' value=" + mousedown_node.answer + "></form>";
+      infodiv.innerHTML += "<h2>Question </br></h2><p>" + mousedown_node.question + "</p></h2><h2>Answer </br></h2><p>" + mousedown_node.answer + "</p><h2># Children </br></h2><p>" + mousedown_node.numchildren + "</p>";
       //this is where want to do something with the mousedown_node. Console logging the object returns its location as well as dummy question successfully. We need to create a modal here that pops out with this 
       
       // reposition drag line
@@ -276,7 +281,7 @@ function mousedown() {
   //nodes are created with questions, answers and num children. Just to demonstrate.
   // insert new node at point
   var point = d3.mouse(this),
-      node = {id: ++lastNodeId, reflexive: false, question:"Question?", answer:"Answer", numchildren:5};
+      node = {id: ++lastNodeId, reflexive: false, question:"Question " + lastNodeId, answer:"Answer " + lastNodeId, numchildren:5};
   node.x = point[0];
   node.y = point[1];
   nodes.push(node);

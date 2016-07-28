@@ -15,6 +15,14 @@ svg {
   border: 1px solid lightgrey;
   display: inline-block;
   vertical-align: top;
+  text-align: center;
+  font-family: georgia;
+}
+#node_div {
+  height: 60px;
+  border-bottom: 1px solid lightgrey;
+  text-align: center;
+  font-family: georgia;
 }
 svg:not(.active):not(.ctrl) {
   cursor: crosshair;
