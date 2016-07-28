@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname,  "./client")));
 var route_setter = require("./server/config/routes.js"); 
 route_setter(app); 
 app.listen(8000, function() {
+    console.log("running on 8000");
 	// setup default connection to database on app load 
  	sql.setDefault({
         user: "kabirkhan",

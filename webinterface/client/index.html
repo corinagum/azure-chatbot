@@ -4,11 +4,26 @@
     <meta charset="utf-8">
     <title>Directed Graph Editor</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        $("#info_div").css("visibility", "hidden");
+    });
+
+    </script>
   </head>
   
   <body>
+    <div id="main_container" class="container-fluid row">
+      <div id="svg_div" class="container col-sm-9">
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="app.js"></script>
+      </div>
+  	  <div id="info_div" class="container col-sm-3"></div>
+    </div>
   </body>
-
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="app.js"></script>
 </html>

@@ -1,13 +1,39 @@
 svg {
   background-color: #FFF;
   cursor: default;
+  display: inline-block;
+  vertical-align: top;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
 }
-
+#main_container{
+  width: 99%;
+  height: 99%;
+}
+#info_div {
+  height: 600px;
+  border: 1px solid lightgrey;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-family: georgia;
+}
+#svg_div {
+  height: 600px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-family: georgia;
+}
+#node_div {
+  height: 60px;
+  border-bottom: 1px solid lightgrey;
+  text-align: center;
+  font-family: georgia;
+}
 svg:not(.active):not(.ctrl) {
   cursor: crosshair;
 }

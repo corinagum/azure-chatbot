@@ -1,12 +1,13 @@
-// var width  = 960,
-//     height = 500,
-//     colors = d3.scale.category10();
 
-// var svg = d3.select('body')
-//   .append('svg')
-//   .attr('oncontextmenu', 'return false;')
-//   .attr('width', width)
-//   .attr('height', height);
+var width  = 900,
+    height = 600,
+    colors = d3.scale.category10();
+
+var svg = d3.select('#svg_div')
+  .append('svg')
+  .attr('oncontextmenu', 'return false;')
+  .attr('width', width)
+  .attr('height', height);
 
 var nodes = [];
 var links = [];
@@ -27,17 +28,6 @@ d3.json("http://localhost:8000/References", function(data) {
   }
   restart();
 });
-
-// set up SVG for D3
-var width  = 960,
-    height = 500,
-    colors = d3.scale.category10();
-
-var svg = d3.select('body')
-  .append('svg')
-  .attr('oncontextmenu', 'return false;')
-  .attr('width', width)
-  .attr('height', height);
 
 // init D3 force layout
 var force = d3.layout.force()
@@ -161,7 +151,6 @@ function restart() {
 
   // add new nodes
   var g = circle.enter().append('svg:g');
-
   g.append('svg:circle')
     .attr('class', 'node')
     .attr('r', 12)
@@ -179,14 +168,24 @@ function restart() {
       d3.select(this).attr('transform', '');
     })
     .on('mousedown', function(d) {
-      if(d3.event.ctrlKey) return;
-
+      if (d3.event.ctrlKey) return;
       // select node
       mousedown_node = d;
       if(mousedown_node === selected_node) selected_node = null;
       else selected_node = mousedown_node;
       selected_link = null;
+      console.log(mousedown_node);
 
+      var infodiv = document.getElementById('info_div');
+
+      infodiv.innerHTML = "<div id='node_div'></div>";
+
+      var nodediv = document.getElementById('node_div');
+      nodediv.innerHTML = "<h1> Node " + mousedown_node.id + "</h1>";
+      // infodiv.innerHTML = "<form>ID: <input type='text' value=" + mousedown_node.id + "></br>Question: <input type='text' value=" + mousedown_node.question + "></br>Answer: <input type='text' value=" + mousedown_node.answer + "></form>";
+      infodiv.innerHTML += "<h2>Question </br></h2><p>" + mousedown_node.question + "</p></h2><h2>Answer </br></h2><p>" + mousedown_node.answer + "</p><h2># Children </br></h2><p>" + mousedown_node.numchildren + "</p>";
+      //this is where want to do something with the mousedown_node. Console logging the object returns its location as well as dummy question successfully. We need to create a modal here that pops out with this 
+      infodiv.style.visibility = "visible";
       // reposition drag line
       drag_line
         .style('marker-end', 'url(#end-arrow)')
@@ -267,7 +266,7 @@ function mousedown() {
 
   // insert new node at point
   var point = d3.mouse(this),
-      node = {id: ++lastNodeId, reflexive: false};
+      node = {id: ++lastNodeId, reflexive: false, question:"Question " + lastNodeId, answer:"Answer " + lastNodeId, numchildren:5};
   node.x = point[0];
   node.y = point[1];
   nodes.push(node);
