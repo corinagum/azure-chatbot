@@ -10,17 +10,16 @@ var svg = d3.select('body')
 
 var nodes = [];
 var links = [];
-
+var lastNodeId = 0;
 d3.json("http://localhost:8000/Nodes", function(data) {
 // set up initial nodes and links
 //  - nodes are known by 'id', not by index in array.
 //  - reflexive edges are indicated on the node (as a bold black circle).
 //  - links are always source < target; edge directions are set by 'left' and 'right'.
 
-    var lastNodeId = 0;
-
     for (var idx in data) {
         var row = data[idx];
+        console.log(row);
         nodes.push({ id: row.ID, reflexive: true });
 
         if (row.StartID) {
