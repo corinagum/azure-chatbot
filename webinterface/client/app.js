@@ -1,3 +1,4 @@
+
 var width  = 900,
     height = 600,
     colors = d3.scale.category10();
@@ -11,45 +12,30 @@ var svg = d3.select('#svg_div')
 var nodes = [];
 var links = [];
 var lastNodeId = 0;
+
 d3.json("http://localhost:8000/Nodes", function(data) {
-// set up initial nodes and links
-//  - nodes are known by 'id', not by index in array.
-//  - reflexive edges are indicated on the node (as a bold black circle).
-//  - links are always source < target; edge directions are set by 'left' and 'right'.
-    console.log(data);
     for (var idx in data) {
         var row = data[idx];
-        console.log(row);
-        nodes.push({ id: row.ID, reflexive: true});
-
-        if (row.StartID) {
-
-            var source = { id: row.StartID, reflexive: true },
-                target = { id: row.EndID, reflexive: true };
-
-            console.log("==========================")
-            console.log(source);
-            console.log(target);
-            console.log(nodes[0]);
-            console.log("LINKS:::LINKS:::LINKS")
-            console.log(links);
-            console.log("==========================")
-            console.log()
-            }
+        nodes.push({ id: row.ID, reflexive: true });
+        lastNodeId++;
     }
-    lastNodeId = nodes[nodes.length-1].id;
-    links.push({ source: nodes[0], target: nodes[1], left: false, right: true })
-    links.push({ source: nodes[0], target: nodes[2], left: false, right: true })
-    links.push({ source: nodes[0], target: nodes[3], left: false, right: true })
     restart();
 });
+
+d3.json("http://localhost:8000/References", function(data) {
+  for (var i = 0; i < data.length; ++i) {
+    links.push({ source: data[i].StartID - 1, target: data[i].EndID - 1, left: false, right: true })
+  }
+  restart();
+});
+
 // init D3 force layout
 var force = d3.layout.force()
     .nodes(nodes)
     .links(links)
     .size([width, height])
-    .linkDistance(150)
-    .charge(-500)
+    .linkDistance(50)
+    .charge(-150)
     .on('tick', tick)
 
 // define arrow markers for graph links
@@ -90,6 +76,8 @@ var selected_node = null,
     mousedown_link = null,
     mousedown_node = null,
     mouseup_node = null;
+
+
 
 function resetMouseVars() {
   mousedown_node = null;
@@ -138,11 +126,11 @@ function restart() {
     .style('marker-start', function(d) { return d.left ? 'url(#start-arrow)' : ''; })
     .style('marker-end', function(d) { return d.right ? 'url(#end-arrow)' : ''; })
     .on('mousedown', function(d) {
-      if (d3.event.ctrlKey) return;
+      if(d3.event.ctrlKey) return;
 
       // select link
       mousedown_link = d;
-      if (mousedown_link === selected_link) selected_link = null;
+      if(mousedown_link === selected_link) selected_link = null;
       else selected_link = mousedown_link;
       selected_node = null;
       restart();
@@ -170,12 +158,12 @@ function restart() {
     .style('stroke', function(d) { return d3.rgb(colors(d.id)).darker().toString(); })
     .classed('reflexive', function(d) { return d.reflexive; })
     .on('mouseover', function(d) {
-      if (!mousedown_node || d === mousedown_node) return;
+      if(!mousedown_node || d === mousedown_node) return;
       // enlarge target node
       d3.select(this).attr('transform', 'scale(1.1)');
     })
     .on('mouseout', function(d) {
-      if (!mousedown_node || d === mousedown_node) return;
+      if(!mousedown_node || d === mousedown_node) return;
       // unenlarge target node
       d3.select(this).attr('transform', '');
     })
@@ -183,7 +171,7 @@ function restart() {
       if (d3.event.ctrlKey) return;
       // select node
       mousedown_node = d;
-      if (mousedown_node === selected_node) selected_node = null;
+      if(mousedown_node === selected_node) selected_node = null;
       else selected_node = mousedown_node;
       selected_link = null;
       var infodiv = document.getElementById('info_div');
@@ -205,7 +193,7 @@ function restart() {
       restart();
     })
     .on('mouseup', function(d) {
-      if (!mousedown_node) return;
+      if(!mousedown_node) return;
 
       // needed by FF
       drag_line
@@ -214,15 +202,15 @@ function restart() {
 
       // check for drag-to-self
       mouseup_node = d;
-      if (mouseup_node === mousedown_node) { resetMouseVars(); return; }
+      if(mouseup_node === mousedown_node) { resetMouseVars(); return; }
 
       // unenlarge target node
       d3.select(this).attr('transform', '');
 
-      // add link to graph (update if  exists)
-      // NB: links are strictly source < target; arrows separately specif ied by booleans
+      // add link to graph (update if exists)
+      // NB: links are strictly source < target; arrows separately specified by booleans
       var source, target, direction;
-      if (mousedown_node.id < mouseup_node.id) {
+      if(mousedown_node.id < mouseup_node.id) {
         source = mousedown_node;
         target = mouseup_node;
         direction = 'right';
@@ -237,7 +225,7 @@ function restart() {
         return (l.source === source && l.target === target);
       })[0];
 
-      if (link) {
+      if(link) {
         link[direction] = true;
       } else {
         link = {source: source, target: target, left: false, right: false};
@@ -275,7 +263,7 @@ function mousedown() {
   svg.classed('active', true);
 
   if(d3.event.ctrlKey || mousedown_node || mousedown_link) return;
-  //nodes are created with questions, answers and num children. Just to demonstrate.
+
   // insert new node at point
   var point = d3.mouse(this),
       node = {id: ++lastNodeId, reflexive: false, question:"Question " + lastNodeId, answer:"Answer " + lastNodeId, numchildren:5};
@@ -288,7 +276,7 @@ function mousedown() {
 }
 
 function mousemove() {
-  if (!mousedown_node) return;
+  if(!mousedown_node) return;
 
   // update drag line
   drag_line.attr('d', 'M' + mousedown_node.x + ',' + mousedown_node.y + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
@@ -297,7 +285,7 @@ function mousemove() {
 }
 
 function mouseup() {
-  if (mousedown_node) {
+  if(mousedown_node) {
     // hide drag line
     drag_line
       .classed('hidden', true)
@@ -326,23 +314,23 @@ var lastKeyDown = -1;
 function keydown() {
   d3.event.preventDefault();
 
-  if (lastKeyDown !== -1) return;
+  if(lastKeyDown !== -1) return;
   lastKeyDown = d3.event.keyCode;
 
   // ctrl
-  if (d3.event.keyCode === 17) {
+  if(d3.event.keyCode === 17) {
     circle.call(force.drag);
     svg.classed('ctrl', true);
   }
 
-  if (!selected_node && !selected_link) return;
+  if(!selected_node && !selected_link) return;
   switch(d3.event.keyCode) {
     case 8: // backspace
     case 46: // delete
-      if (selected_node) {
+      if(selected_node) {
         nodes.splice(nodes.indexOf(selected_node), 1);
         spliceLinksForNode(selected_node);
-      } else if (selected_link) {
+      } else if(selected_link) {
         links.splice(links.indexOf(selected_link), 1);
       }
       selected_link = null;
@@ -350,7 +338,7 @@ function keydown() {
       restart();
       break;
     case 66: // B
-      if (selected_link) {
+      if(selected_link) {
         // set link direction to both left and right
         selected_link.left = true;
         selected_link.right = true;
@@ -358,7 +346,7 @@ function keydown() {
       restart();
       break;
     case 76: // L
-      if (selected_link) {
+      if(selected_link) {
         // set link direction to left only
         selected_link.left = true;
         selected_link.right = false;
@@ -366,10 +354,10 @@ function keydown() {
       restart();
       break;
     case 82: // R
-      if (selected_node) {
+      if(selected_node) {
         // toggle node reflexivity
         selected_node.reflexive = !selected_node.reflexive;
-      } else if (selected_link) {
+      } else if(selected_link) {
         // set link direction to right only
         selected_link.left = false;
         selected_link.right = true;
@@ -383,7 +371,7 @@ function keyup() {
   lastKeyDown = -1;
 
   // ctrl
-  if (d3.event.keyCode === 17) {
+  if(d3.event.keyCode === 17) {
     circle
       .on('mousedown.drag', null)
       .on('touchstart.drag', null);
@@ -399,4 +387,3 @@ d3.select(window)
   .on('keydown', keydown)
   .on('keyup', keyup);
 restart();
-

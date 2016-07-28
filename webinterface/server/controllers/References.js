@@ -1,12 +1,12 @@
 var sql = require("seriate")
 
 module.exports = {
-
+    
   // Get all appointments from the database
   index: function(req, res) {
     sql.execute( {
-        name: "selectFromNode",
-        preparedSql: "SELECT ID, StartID, EndID FROM Node n LEFT JOIN Reference r ON n.ID = r.EndID",
+        name: "selectFromReference",
+        preparedSql: "SELECT StartID, EndID FROM Reference",
     }).then( function( data ) {
         console.log("Got It!");
         console.log(data);
@@ -16,4 +16,3 @@ module.exports = {
     });
   }
 }
-
