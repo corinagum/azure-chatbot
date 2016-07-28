@@ -13,7 +13,6 @@ var nodes = [];
 var links = [];
 var lastNodeId = 0;
 var didSelectNode = false;
-var modal_is_displayed = false;
 
 d3.json("http://localhost:8000/api/nodes", function(data) {
   console.log(data);
@@ -178,20 +177,7 @@ function restart() {
       if(mousedown_node === selected_node) selected_node = null;
       else selected_node = mousedown_node;
       selected_link = null;
-      var infodiv = document.getElementById('info_div');
-      infodiv.innerHTML = "<div id='panel' class='panel panel-default'><div id='panel_heading' class='panel-heading'></div><div id='panel_body'class='panel-body'></div><div id='panel_footer' class='panel-footer'></div></div>";
-      var panelheader = document.getElementById('panel_heading');
-      var panelbody = document.getElementById('panel_body');
-      var panelfooter = document.getElementById('panel_footer');
-      panelheader.innerHTML = "<h2> Node " + mousedown_node.id + "</h3>";
-      panelbody.innerHTML += "<h3>Question</h3><div class='well'><p>" + mousedown_node.question + "</p></div>";
-      panelbody.innerHTML += "<h3>Child Answers </br></h3>";
-      panelbody.innerHTML += "<ul class='list-group'><li class='list-group-item'>First item</li><li class='list-group-item'>Second item</li><li class='list-group-item'>Third item</li></ul>";
-      // panelbody.innerHTML += "<h3>Parent Question</h3><div class='well'><p>Sample Parent Question</p></div>";
-      panelbody.innerHTML += "<h3>Answer</h3><div class='well'><p>" + mousedown_node.answer + "</p></div>";
-
-      panelfooter.innerHTML += "<button id='edit_button' type='button' onClick='editPanel()'class='btn btn-block btn-info'>Edit</button>";
-      infodiv.style.visibility = "visible";
+      openInfo();
       // reposition drag line
       drag_line
         .style('marker-end', 'url(#end-arrow)')
@@ -265,11 +251,6 @@ function mousedown() {
   // prevent I-bar on drag
   //d3.event.preventDefault();
   // because :active only works in WebKit?
-  console.log("mouseddown");
-  console.log(modal_is_displayed);
-  if(modal_is_displayed == true){
-    removeNodeAfterModalClose();
-  }
   if (didSelectNode == false){
     var idlabel = document.getElementById('id_label');
     idlabel.innerHTML = "ID: " + (lastNodeId + 1);
@@ -396,13 +377,42 @@ function keyup() {
   }
 }
 function removeNodeAfterModalClose(){
-  modal_is_displayed = false;
   selected_node = nodes[lastNodeId-1];
   nodes.splice(nodes.indexOf(selected_node), 1);
   spliceLinksForNode(selected_node);
   selected_node = null;
   restart();
   lastNodeId--;
+}
+function openInfo(){
+  var child_nodes = getChildNodes();
+  var infodiv = document.getElementById('info_div');
+  infodiv.innerHTML = "<div id='panel' class='panel panel-default'><div id='panel_heading' class='panel-heading'></div><div id='panel_body'class='panel-body'></div><div id='panel_footer' class='panel-footer'></div></div>";
+  var panelheader = document.getElementById('panel_heading');
+  var panelbody = document.getElementById('panel_body');
+  var panelfooter = document.getElementById('panel_footer');
+  panelheader.innerHTML = "<h2> Node " + mousedown_node.id + "</h3>";
+  panelbody.innerHTML += "<h3>Question</h3><div class='well'><p>" + mousedown_node.question + "</p></div>";
+  panelbody.innerHTML += "<h3>Child Answers </br></h3>";
+  panelbody.innerHTML += "<ul id='children_list' class='list-group'></ul>";
+  var childrenlist = document.getElementById('children_list');
+  for (var i=0; i<child_nodes.length; i++){
+    childrenlist.innerHTML += "<li class='list-group-item'>ID(" +  child_nodes[i].id + ") : " + child_nodes[i].answer + "</li>"
+  }
+  // panelbody.innerHTML += "<h3>Parent Question</h3><div class='well'><p>Sample Parent Question</p></div>";
+  panelbody.innerHTML += "<h3>Answer</h3><div class='well'><p>" + mousedown_node.answer + "</p></div>";
+  panelfooter.innerHTML += "<button id='edit_button' type='button' onClick='editPanel()'class='btn btn-block btn-info'>Edit</button>";
+  infodiv.style.visibility = "visible";
+}
+function getChildNodes(){
+  var child1 = {id: 1, reflexive: false, question:"Question1", answer:"Answer 1"};
+  var child2 = {id: 2, reflexive: false, question:"Question2", answer:"Answer 2"};
+  var child3 = {id: 3, reflexive: false, question:"Question3", answer:"Answer 3"};
+  var children = [];
+  children.push(child1);
+  children.push(child2);
+  children.push(child3);
+  return children;
 }
 // app starts here
 svg.on('mousedown', mousedown)
