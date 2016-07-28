@@ -14,19 +14,19 @@ var links = [];
 var lastNodeId = 0;
 var didSelectNode = false;
 
-d3.json("http://localhost:8000/Nodes", function(data) {
-  console.log(data);
+d3.json("http://localhost:8000/api/nodes", function(data) {
     for (var idx in data) {
         var row = data[idx];
         nodes.push({ id: row.ID, reflexive: true, question: row.Question, answer: row.Answer });
-        lastNodeId++;
     }
+    lastNodeId = nodes[nodes.length - 1].id;
     restart();
 });
 
-d3.json("http://localhost:8000/References", function(data) {
+
+d3.json("http://localhost:8000/api/references", function(data) {
   for (var i = 0; i < data.length; ++i) {
-    links.push({ source: data[i].StartID - 1, target: data[i].EndID - 1, left: false, right: true })
+    links.push({ source: data[i].StartID - 1, target: data[i].EndID - 1, left: false, right: true });
   }
   restart();
 });
