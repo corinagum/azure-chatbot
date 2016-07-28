@@ -13,6 +13,12 @@ svg {
   width: 99%;
   height: 99%;
 }
+h3{
+  font-style: italic;
+}
+#panel{
+  margin-top: 1%;
+}
 #info_div {
   height: 600px;
   display: inline-block;
@@ -22,6 +28,10 @@ svg {
 }
 #panel_footer, #panel_heading {
   text-align: center;
+}
+#panel_body{
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
 #svg_div {
   height: 600px;

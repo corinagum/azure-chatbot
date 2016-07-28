@@ -14,7 +14,7 @@ var links = [];
 var lastNodeId = 0;
 var didSelectNode = false;
 
-d3.json("http://localhost:8000/Nodes", function(data) {
+d3.json("http://localhost:8000/api/nodes", function(data) {
   console.log(data);
     for (var idx in data) {
         var row = data[idx];
@@ -24,7 +24,7 @@ d3.json("http://localhost:8000/Nodes", function(data) {
     restart();
 });
 
-d3.json("http://localhost:8000/References", function(data) {
+d3.json("http://localhost:8000/api/references", function(data) {
   for (var i = 0; i < data.length; ++i) {
     links.push({ source: data[i].StartID - 1, target: data[i].EndID - 1, left: false, right: true })
   }
@@ -178,13 +178,18 @@ function restart() {
       else selected_node = mousedown_node;
       selected_link = null;
       var infodiv = document.getElementById('info_div');
-      infodiv.innerHTML = "<div class='panel panel-default'><div id='panel_heading' class='panel-heading'></div><div id='panel_body'class='panel-body'></div><div id='panel_footer' class='panel-footer'></div></div>";
+      infodiv.innerHTML = "<div id='panel' class='panel panel-default'><div id='panel_heading' class='panel-heading'></div><div id='panel_body'class='panel-body'></div><div id='panel_footer' class='panel-footer'></div></div>";
       var panelheader = document.getElementById('panel_heading');
       var panelbody = document.getElementById('panel_body');
       var panelfooter = document.getElementById('panel_footer');
-      panelheader.innerHTML = "<h1> Node " + mousedown_node.id + "</h1>";
-      panelbody.innerHTML += "<h2>Question </br></h2><p>" + mousedown_node.question + "</p></h2><h2>Answer </br></h2><p>" + mousedown_node.answer + "</p><h2># Children </br></h2><p>" + mousedown_node.numchildren + "</p>";
-      panelfooter.innerHTML += "<button type='button' onClick='editPanel()'class='btn btn-info'>Edit</button>";
+      panelheader.innerHTML = "<h2> Node " + mousedown_node.id + "</h3>";
+      panelbody.innerHTML += "<h3>Question</h3><div class='well'><p>" + mousedown_node.question + "</p></div>";
+      panelbody.innerHTML += "<h3>Child Answers </br></h3>";
+      panelbody.innerHTML += "<ul class='list-group'><li class='list-group-item'>First item</li><li class='list-group-item'>Second item</li><li class='list-group-item'>Third item</li></ul>";
+      // panelbody.innerHTML += "<h3>Parent Question</h3><div class='well'><p>Sample Parent Question</p></div>";
+      panelbody.innerHTML += "<h3>Answer</h3><div class='well'><p>" + mousedown_node.answer + "</p></div>";
+
+      panelfooter.innerHTML += "<button id='edit_button' type='button' onClick='editPanel()'class='btn btn-block btn-info'>Edit</button>";
       infodiv.style.visibility = "visible";
       // reposition drag line
       drag_line
