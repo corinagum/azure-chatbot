@@ -1,7 +1,11 @@
 
+/*
 * {
   border: 1px solid black;
 }
+*/
+
+
 /* GLOBAL STYLES
 -----------------------------------------*/
 html,
@@ -33,8 +37,7 @@ header,
 main,
 nav {
   padding: 20px 30px;
-}
-main {
+}f
   clear: both;
   height: 470px;
 }
@@ -77,6 +80,35 @@ nav a {
   /*background: url(../images/background-6.jpg) no-repeat 50%;*/
   background-size: cover;
   background-color: lightblue;   
+}
+
+.chat-bot-iframe {
+  float: left;
+  width: 80%;
+}
+
+.bot-help-and-commands {
+  float: right;
+  width: 18%
+}
+
+.bot-help-and-commands ul{
+  margin:0px;
+  list-style:none;
+  padding:0px;
+}
+
+.bot-help-and-commands li {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding-left: 0px;
+  list-style-type: none;
+  font-weight: 600;
+}
+
+.bot-help-and-commands-bold  {
+  font-weight: 900;
 }
 
 /* ABOUT STYLES
@@ -160,4 +192,5 @@ footer {
   text-align: center;
   padding: 1px;
   text-transform: lowercase;
+  clear: both;
 }
