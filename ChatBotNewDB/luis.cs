@@ -16,7 +16,7 @@ namespace ChatBot
             string strRet = string.Empty;
             using (var client = new HttpClient())
             {
-                string uri = "https://api.projectoxford.ai/luis/v1/application?id=ae1e26d3-1a9e-4b1a-b6a9-ec711b25eced&subscription-key=d9ee5df0dbaa48458789f025460b8aa1&q=" + strInput;
+                string uri = "https://api.projectoxford.ai/luis/v1/application?id=26ed7d66-9f1a-4ca2-8c49-ff2253b0e4b9&subscription-key=4f3d135e368c48ae85ecdbb398fc4199&q=" + strInput;
                 HttpResponseMessage msg = await client.GetAsync(uri);
 
                 if (msg.IsSuccessStatusCode)

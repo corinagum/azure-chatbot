@@ -43,6 +43,9 @@ namespace ChatBot
                 }
                 else
                 {
+                    supportLUIS luisAnswer = await LUISTypeParser.ParseUserInput(activity.Text);
+                    var intent = luisAnswer.intents[0].intent;
+                    activity.Text = intent == "Affirmative" ? "yes" : intent == "Negative" ? "no" : activity.Text;
                     await Conversation.SendAsync(activity, () => new NodeChatBot());
                 }
             }
