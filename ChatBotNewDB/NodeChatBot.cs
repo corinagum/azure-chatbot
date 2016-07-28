@@ -28,19 +28,18 @@ namespace ChatBot
             var message = await argument;
             supportLUIS luisAnswer = await LUISTypeParser.ParseUserInput(message.Text);
             var intent = luisAnswer.intents[0].intent;
-            int rootId = intent == "SSH" ? 2 : intent == "None" ? 1 : intent == "Performance" ? 3 : 1;
             using (var db = new LeapChatBotDBEntities())
             {
-                var query = from c in db.Node
-                            where c.ID == rootId
-                            select c;
-                foreach (var item in query)
+                var intentQuery = from c in db.Intent where c.IntentName == intent select c.ID;
+                var intentNodeID = intentQuery.ToArray()[0];
+                var nodeQuery = from c in db.Node where c.ID == intentNodeID select c;
+                foreach(var item in nodeQuery)
                 {
                     currentNode.ID = item.ID;
                     currentNode.Question = item.Question;
                     currentNode.Answer = item.Answer;
+                    nodeSession.Add(currentNode);
                 }
-                nodeSession.Add(currentNode);
 
                 var results = db.GetAllConnectedNodes(currentNode.ID).ToList();
                 results.ForEach(x => options.Add(x.Answer));
@@ -114,7 +113,8 @@ namespace ChatBot
                 }
                 nodeList.ForEach(x => options.Add(x.Answer));
             }
-            options.Add("Go Back");
+            if(nodeSession.Count>1)
+                options.Add("Go Back");
             PromptDialog.Choice(
                 context: context,
                 resume: ResumeAndPromptPlatformAsync,
