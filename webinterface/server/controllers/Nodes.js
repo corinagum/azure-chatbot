@@ -62,5 +62,18 @@ module.exports = {
               }
           }
       })
+  },
+
+  // Get all connected nodes to display as children
+  showAllChildren: function (req, res) {
+      sql.execute({
+          procedure: "GetAllConnectedNodes",
+          params: {
+              id: {
+                  type: sql.INT,
+                  val: req.params.id
+              }
+          }
+      })
   }
 }
