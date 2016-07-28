@@ -9,8 +9,11 @@ svg {
   -o-user-select: none;
   user-select: none;
 }
+#main_container{
+  width: 99%;
+  height: 99%;
+}
 #info_div {
-  width: 300px;
   height: 600px;
   border: 1px solid lightgrey;
   display: inline-block;
@@ -19,7 +22,6 @@ svg {
   font-family: georgia;
 }
 #svg_div {
-  width: 900px;
   height: 600px;
   display: inline-block;
   vertical-align: top;
