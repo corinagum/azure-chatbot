@@ -260,9 +260,8 @@ function mousedown() {
   // prevent I-bar on drag
   //d3.event.preventDefault();
   // because :active only works in WebKit?
-  console.log(didSelectNode);
   if (didSelectNode == false){
-      var idlabel = document.getElementById('id_label');
+    var idlabel = document.getElementById('id_label');
     idlabel.innerHTML = "ID: " + (lastNodeId + 1);
     $('#myModal').modal('show');
   }
@@ -385,7 +384,14 @@ function keyup() {
     svg.classed('ctrl', false);
   }
 }
-
+function removeNodeAfterModalClose(){
+  selected_node = nodes[lastNodeId-1];
+  nodes.splice(nodes.indexOf(selected_node), 1);
+  spliceLinksForNode(selected_node);
+  selected_node = null;
+  restart();
+  lastNodeId--;
+}
 // app starts here
 svg.on('mousedown', mousedown)
   .on('mousemove', mousemove)
