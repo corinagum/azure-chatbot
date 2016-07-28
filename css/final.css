@@ -37,10 +37,13 @@ header,
 main,
 nav {
   padding: 20px 30px;
-}f
-  clear: both;
-  height: 470px;
+  float: right;
 }
+
+main {
+  height: 480px;
+}
+
 .highlight {
   color: blue;     /* blue */
 }
@@ -145,7 +148,6 @@ nav a {
 
 /* form styles */
 form {
-  border: 1px solid black;
   height: 400px;
   width: 400px;
 }
