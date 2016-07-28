@@ -28,7 +28,7 @@ namespace ChatBot
             var message = await argument;
             supportLUIS luisAnswer = await LUISTypeParser.ParseUserInput(message.Text);
             var intent = luisAnswer.intents[0].intent;
-            intent = intent == "None" ? "Greeting" : intent;
+            intent = intent == "None"|| intent == "Affirmative" || intent == "Negative" ? "Greeting" : intent;
             using (var db = new LeapChatBotDBEntities())
             {
                 var intentQuery = from c in db.Intent where c.IntentName == intent select c.ID;
