@@ -13,6 +13,7 @@ var nodes = [];
 var links = [];
 var lastNodeId = 0;
 var didSelectNode = false;
+var modal_is_displayed = false;
 
 d3.json("http://localhost:8000/api/nodes", function(data) {
   console.log(data);
@@ -264,10 +265,16 @@ function mousedown() {
   // prevent I-bar on drag
   //d3.event.preventDefault();
   // because :active only works in WebKit?
+  console.log("mouseddown");
+  console.log(modal_is_displayed);
+  if(modal_is_displayed == true){
+    removeNodeAfterModalClose();
+  }
   if (didSelectNode == false){
     var idlabel = document.getElementById('id_label');
     idlabel.innerHTML = "ID: " + (lastNodeId + 1);
     $('#myModal').modal('show');
+    modal_is_displayed = true;
   }
   didSelectNode = false;
   svg.classed('active', true);
@@ -389,6 +396,7 @@ function keyup() {
   }
 }
 function removeNodeAfterModalClose(){
+  modal_is_displayed = false;
   selected_node = nodes[lastNodeId-1];
   nodes.splice(nodes.indexOf(selected_node), 1);
   spliceLinksForNode(selected_node);

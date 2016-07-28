@@ -10,8 +10,13 @@
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+    var options = {
+      "backdrop" : "static",
+      "show" : false
+    }
     $( document ).ready(function() {
         $("#info_div").css("visibility", "hidden");
+        $("#myModal").modal(options);
     });
 
     </script>
