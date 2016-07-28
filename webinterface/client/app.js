@@ -1,5 +1,5 @@
 var width  = 960,
-    height = 500,
+    height = 600,
     colors = d3.scale.category10();
 
 var svg = d3.select('body')
@@ -13,9 +13,9 @@ var svg = d3.select('body')
 //  - reflexive edges are indicated on the node (as a bold black circle).
 //  - links are always source < target; edge directions are set by 'left' and 'right'.
 var nodes = [
-    {id: 0, reflexive: false},
-    {id: 1, reflexive: true },
-    {id: 2, reflexive: false}
+    {id: 0, reflexive: false, question:"Question?", answer:"Answer", numchildren:3},
+    {id: 1, reflexive: true, question:"Question?", answer:"Answer", numchildren:2},
+    {id: 2, reflexive: false, question:"Question?", answer:"Answer", numchildren:5}
   ],
   lastNodeId = 2,
   links = [
@@ -143,7 +143,6 @@ function restart() {
 
   // add new nodes
   var g = circle.enter().append('svg:g');
-
   g.append('svg:circle')
     .attr('class', 'node')
     .attr('r', 12)
@@ -161,14 +160,18 @@ function restart() {
       d3.select(this).attr('transform', '');
     })
     .on('mousedown', function(d) {
-      if(d3.event.ctrlKey) return;
-
+      if(d3.event.ctrlKey) return; 
       // select node
       mousedown_node = d;
       if(mousedown_node === selected_node) selected_node = null;
       else selected_node = mousedown_node;
       selected_link = null;
+      console.log(mousedown_node);
 
+      var infodiv = document.getElementById('info_div');
+      infodiv.innerHTML += "hello";
+      //this is where want to do something with the mousedown_node. Console logging the object returns its location as well as dummy question successfully. We need to create a modal here that pops out with this 
+      
       // reposition drag line
       drag_line
         .style('marker-end', 'url(#end-arrow)')
@@ -246,10 +249,10 @@ function mousedown() {
   svg.classed('active', true);
 
   if(d3.event.ctrlKey || mousedown_node || mousedown_link) return;
-
+  //nodes are created with questions, answers and num children. Just to demonstrate.
   // insert new node at point
   var point = d3.mouse(this),
-      node = {id: ++lastNodeId, reflexive: false};
+      node = {id: ++lastNodeId, reflexive: false, question:"Question?", answer:"Answer", numchildren:5};
   node.x = point[0];
   node.y = point[1];
   nodes.push(node);

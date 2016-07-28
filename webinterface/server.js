@@ -23,12 +23,12 @@ var connection = {
     }
 };
  
-sql.execute( connection, {
-	name: "selectFromNode",
-	preparedSql: "select * from node",
-} ).then( function( data ) {
-	console.log("Got It!");
-	console.log(data);
-}, function( err ) {
-	console.log( err );
-} );
+//sql.execute( connection, {
+//	name: "selectFromNode",
+//	preparedSql: "select * from node",
+//} ).then( function( data ) {
+//	console.log("Got It!");
+//	console.log(data);
+//}, function( err ) {
+//	console.log( err );
+//} );
