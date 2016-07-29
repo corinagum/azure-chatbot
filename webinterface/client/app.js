@@ -393,15 +393,16 @@ function openInfo(){
   panelbody.innerHTML += "<h3>Child Answers </br></h3>";
   panelbody.innerHTML += "<ul id='children_list' class='list-group'></ul>";
   var childrenlist = document.getElementById('children_list'); 
-  getChildNodes();
+  var currentID = mousedown_node.id
+  getChildNodes(currentID);
   // panelbody.innerHTML += "<h3>Parent Question</h3><div class='well'><p>Sample Parent Question</p></div>";
   panelbody.innerHTML += "<h3>Answer</h3><div class='well'><p>" + mousedown_node.answer + "</p></div>";
   panelfooter.innerHTML += "<button id='edit_button' type='button' onClick='editPanel()'class='btn btn-block btn-info'>Edit</button>";
   infodiv.style.visibility = "visible";
 }
-function getChildNodes(){
+function getChildNodes(id){
   var children = [];
-  $.get("/api/nodes/children/1", function(data) {
+  $.get("/api/nodes/children/" + id, function(data) {
     var returned_children = data[0][0];
     for(var i=0; i<returned_children.length; i++){
       children.push(returned_children[i]);
