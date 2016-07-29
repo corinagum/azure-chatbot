@@ -223,7 +223,7 @@ function restart() {
       // add link to graph (update if exists)
       // NB: links are strictly source < target; arrows separately specified by booleans
       var source, target, direction;
-      if(mousedown_node.id < mouseup_node.id) {
+      if (mousedown_node.id < mouseup_node.id) {
         source = mousedown_node;
         target = mouseup_node;
         direction = 'right';
@@ -238,12 +238,19 @@ function restart() {
         return (l.source === source && l.target === target);
       })[0];
 
-      if(link) {
+      if (link) {
         link[direction] = true;
       } else {
         link = {source: source, target: target, left: false, right: false};
         link[direction] = true;
+
+
+        console.log(link);
+
+        //
+        postNewLink(link);
         links.push(link);
+        
       }
 
       // select new link
@@ -270,9 +277,12 @@ function mousedown() {
   // prevent I-bar on drag
   //d3.event.preventDefault();
   // because :active only works in WebKit?
-  if (didSelectNode == false){
-    var idlabel = document.getElementById('id_label');
-    idlabel.innerHTML = "ID: " + (lastNodeId + 1);
+  if (didSelectNode == false) {
+    var id = lastNodeId + 1;
+    $('#id_value').attr('value', id);
+    $('#id_label').html("ID: " + id + '\n')
+    // var idLabel = document.getElementById('id_label');
+    // idLabel.innerHTML = ;    
     $('#myModal').modal('show');
     modal_is_displayed = true;
   }
@@ -329,7 +339,7 @@ function spliceLinksForNode(node) {
 var lastKeyDown = -1;
 
 function keydown() {
-  d3.event.preventDefault();
+ // d3.event.preventDefault();
 
   if(lastKeyDown !== -1) return;
   lastKeyDown = d3.event.keyCode;
@@ -395,15 +405,19 @@ function keyup() {
     svg.classed('ctrl', false);
   }
 }
-function removeNodeAfterModalClose(){
+
+// Removes added node if user doesn't complete setup
+function removeNodeAfterModalClose() {
   selected_node = nodes[lastNodeId-1];
   nodes.splice(nodes.indexOf(selected_node), 1);
   spliceLinksForNode(selected_node);
   selected_node = null;
   restart();
-  lastNodeId--;
+  lastNodeId = nodes[nodes.length - 1].id;
 }
-function openInfo(){
+
+// Opens sidebar with node info
+function openInfo() {
   var infodiv = document.getElementById('info_div');
   infodiv.innerHTML = "<div id='panel' class='panel panel-default'><div id='panel_heading' class='panel-heading'></div><div id='panel_body'class='panel-body'></div><div id='panel_footer' class='panel-footer'></div></div>";
   var panelheader = document.getElementById('panel_heading');
@@ -421,21 +435,27 @@ function openInfo(){
   panelfooter.innerHTML += "<button id='edit_button' type='button' onClick='editPanel()'class='btn btn-block btn-info'>Edit</button>";
   infodiv.style.visibility = "visible";
 }
-function getChildNodes(id){
+
+// Get child nodes to display in info sidebar
+function getChildNodes(id) {
   var children = [];
   $.get("/api/nodes/children/" + id, function(data) {
     var returned_children = data[0][0];
-    for(var i=0; i<returned_children.length; i++){
+    for(var i = 0; i < returned_children.length; i++) {
       children.push(returned_children[i]);
     }
     console.log(children);
     var childrenlist = document.getElementById('children_list');
-    for (var i=0; i<children.length; i++){
+    for (var i = 0; i < children.length; i++) {
       childrenlist.innerHTML += "<li class='list-group-item'>ID(" +  children[i].ID + ") : " + children[i].Answer + "</li>"
     }
   });
-
 }
+
+function postNewLink(link) {
+  $.post('/api/references', { parentID: link.source.id, childID: link.target.id })
+}
+
 // app starts here
 svg.on('mousedown', mousedown)
   .on('mousemove', mousemove)
