@@ -126,3 +126,46 @@ C:\Users\v-bemier\Downloads\azure-chatbot\ChatBotNewDB\bin\zh-hans\Microsoft.Bot
 C:\Users\v-bemier\Downloads\azure-chatbot\ChatBotNewDB\obj\Debug\ChatBotNewDB.csprojResolveAssemblyReference.cache
 C:\Users\v-bemier\Downloads\azure-chatbot\ChatBotNewDB\obj\Debug\Bot Application1.dll
 C:\Users\v-bemier\Downloads\azure-chatbot\ChatBotNewDB\obj\Debug\Bot Application1.pdb
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Bot Application1.dll.config
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Bot Application1.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Bot Application1.pdb
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Autofac.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Chronic.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\EntityFramework.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\EntityFramework.SqlServer.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.Bot.Builder.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.Bot.Connector.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.IdentityModel.Protocol.Extensions.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.Rest.ClientRuntime.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Newtonsoft.Json.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.Net.Http.Formatting.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.Web.Http.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.Web.Http.WebHost.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Autofac.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\EntityFramework.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\EntityFramework.SqlServer.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.Bot.Builder.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.Bot.Connector.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.IdentityModel.Protocol.Extensions.pdb
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.IdentityModel.Protocol.Extensions.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.Rest.ClientRuntime.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\Newtonsoft.Json.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.Net.Http.Formatting.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.Web.Http.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\System.Web.Http.WebHost.xml
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\ar\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\en\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\es\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\fa\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\fr\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\ja\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\ru\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\obj\Debug\ChatBotNewDB.csprojResolveAssemblyReference.cache
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\obj\Debug\Bot Application1.dll
+C:\Users\Stephanie\LEAP_classwork\Azure Troubleshooting Bot\azure-chatbot-0728b\azure-chatbot\ChatBotNewDB\obj\Debug\Bot Application1.pdb
