@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Directed Graph Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      "backdrop" : "static",
+      "show" : false
+    }
+    $( document ).ready(function() {
+        $("#info_div").css("visibility", "hidden");
+        $("#myModal").modal(options);
+    });
+
+    </script>
+  </head>
+  
+  <body>
+    <div id="main_container" class="container-fluid row">
+      <div id="svg_div" class="container col-sm-8">
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="app.js"></script>
+      </div>
+  	  <div id="info_div" class="container col-sm-4"></div>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+           aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                      <button onclick="removeNodeAfterModalClose()" type="button" class="close" 
+                         data-dismiss="modal">
+                             <span aria-hidden="true">&times;</span>
+                             <span class="sr-only">Close</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">
+                          Create a New Node
+                      </h4>
+                  </div>
+                  
+                  <div class="modal-body">                      
+                      <form role="form" action="http://localhost:8000/api/nodes" method="POST">
+                        <div class="form-group">
+                          <label id="id_label">ID:</label>
+                          <input type="hidden" id="id_value" name="id">
+                        </div>
+                        <div class="form-group">
+                          <label for="question">Question</label>
+                            <input type="text" class="form-control"
+                            id="question" placeholder="Enter question" name="question"/>
+                        </div>                        
+                        <div class="form-group">
+                          <label for="answer">Answer</label>
+                          <input type="text" class="form-control"
+                                id="answer" placeholder="Enter answer" name="answer"/>
+                        </div>
+                        <div class="form-group">
+                          <label for="parentNodeID">Parent Node ID</label>
+                            <input type="password" class="form-control"
+                                id="parentNodeID" placeholder="Enter the ID of the Parent Node"/>
+                        </div>                         
+                        <input type="submit" value="Save Node to Database" class="btn btn-primary">  
+                        <button type="button" onclick="removeNodeAfterModalClose()" class="btn btn-default"
+                              data-dismiss="modal">
+                                  Cancel
+                        </button>                         
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
