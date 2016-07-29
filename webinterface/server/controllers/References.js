@@ -6,7 +6,7 @@ module.exports = {
   index: function(req, res) {
     sql.execute( {
         name: "selectFromReference",
-        preparedSql: "SELECT TOP(105) ParentID, ChildID FROM Reference WHERE ParentID != 71",
+        preparedSql: "SELECT ParentID, ChildID FROM Reference",
     }).then( function( data ) {
         console.log("Got It!");
         console.log(data);

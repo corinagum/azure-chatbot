@@ -6,7 +6,7 @@ module.exports = {
   index: function (req, res) {
     sql.execute({
         name: "selectFromNode",
-        preparedSql: "SELECT TOP(114) * FROM Node",
+        preparedSql: "SELECT * FROM Node",
     }).then( function (data) {       
         res.json(data);
     }, function (err) {
