@@ -69,11 +69,15 @@ module.exports = {
       sql.execute({
           procedure: "GetAllConnectedNodes",
           params: {
-              id: {
+              PreviousID: {
                   type: sql.INT,
                   val: req.params.id
               }
           }
-      })
+      }).then( function (data) {       
+        res.json(data);
+    }, function (err) {
+        console.log( err );
+    });
   }
 }

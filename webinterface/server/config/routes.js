@@ -6,7 +6,7 @@ module.exports = function(app) {
 	app.get('/api/nodes', function (req, res) { 
  		node.index(req, res);
  	}); 
-	app.get('/api/nodes/children', function (req, res) {
+	app.get('/api/nodes/children/:id', function (req, res) {
 		node.showAllChildren(req, res);
 	})
 	app.post('/api/nodes', function (req, res) {

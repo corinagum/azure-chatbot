@@ -2,7 +2,6 @@
 var width  = 900,
     height = 600,
     colors = d3.scale.category10();
-
 var svg = d3.select('#svg_div')
   .append('svg')
   .attr('oncontextmenu', 'return false;')
@@ -384,7 +383,6 @@ function removeNodeAfterModalClose(){
   lastNodeId--;
 }
 function openInfo(){
-  var child_nodes = getChildNodes();
   var infodiv = document.getElementById('info_div');
   infodiv.innerHTML = "<div id='panel' class='panel panel-default'><div id='panel_heading' class='panel-heading'></div><div id='panel_body'class='panel-body'></div><div id='panel_footer' class='panel-footer'></div></div>";
   var panelheader = document.getElementById('panel_heading');
@@ -394,24 +392,27 @@ function openInfo(){
   panelbody.innerHTML += "<h3>Question</h3><div class='well'><p>" + mousedown_node.question + "</p></div>";
   panelbody.innerHTML += "<h3>Child Answers </br></h3>";
   panelbody.innerHTML += "<ul id='children_list' class='list-group'></ul>";
-  var childrenlist = document.getElementById('children_list');
-  for (var i=0; i<child_nodes.length; i++){
-    childrenlist.innerHTML += "<li class='list-group-item'>ID(" +  child_nodes[i].id + ") : " + child_nodes[i].answer + "</li>"
-  }
+  var childrenlist = document.getElementById('children_list'); 
+  getChildNodes();
   // panelbody.innerHTML += "<h3>Parent Question</h3><div class='well'><p>Sample Parent Question</p></div>";
   panelbody.innerHTML += "<h3>Answer</h3><div class='well'><p>" + mousedown_node.answer + "</p></div>";
   panelfooter.innerHTML += "<button id='edit_button' type='button' onClick='editPanel()'class='btn btn-block btn-info'>Edit</button>";
   infodiv.style.visibility = "visible";
 }
 function getChildNodes(){
-  var child1 = {id: 1, reflexive: false, question:"Question1", answer:"Answer 1"};
-  var child2 = {id: 2, reflexive: false, question:"Question2", answer:"Answer 2"};
-  var child3 = {id: 3, reflexive: false, question:"Question3", answer:"Answer 3"};
   var children = [];
-  children.push(child1);
-  children.push(child2);
-  children.push(child3);
-  return children;
+  $.get("/api/nodes/children/1", function(data) {
+    var returned_children = data[0][0];
+    for(var i=0; i<returned_children.length; i++){
+      children.push(returned_children[i]);
+    }
+    console.log(children);
+    var childrenlist = document.getElementById('children_list');
+    for (var i=0; i<children.length; i++){
+      childrenlist.innerHTML += "<li class='list-group-item'>ID(" +  children[i].ID + ") : " + children[i].Answer + "</li>"
+    }
+  });
+
 }
 // app starts here
 svg.on('mousedown', mousedown)
