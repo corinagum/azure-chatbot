@@ -13,10 +13,10 @@ namespace ChatBot
     class NodeChatBot : IDialog<object>
     {
 
-        Node2 currentNode = new Node2();
-        List<Node2> nodeList = new List<Node2>();
-        List<Node2> nodeSession = new List<Node2>();
-        List<string> options = new List<string>();
+        //Node2 currentNode = new Node2();
+        //List<Node2> nodeList = new List<Node2>();
+        //List<Node2> nodeSession = new List<Node2>();
+        //List<string> options = new List<string>();
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -36,58 +36,51 @@ namespace ChatBot
                 var nodeQuery = from c in db.Node where c.ID == intentNodeID select c;
                 foreach(var item in nodeQuery)
                 {
-                    currentNode.ID = item.ID;
-                    currentNode.Question = item.Question;
-                    currentNode.Answer = item.Answer;
-                    nodeSession.Add(currentNode);
+                    MessagesController.currentNode.ID = item.ID;
+                    MessagesController.currentNode.Question = item.Question;
+                    MessagesController.currentNode.Answer = item.Answer;
+                    MessagesController.nodeSession.Add(MessagesController.currentNode);
                 }
 
-                var results = db.GetAllConnectedNodes(currentNode.ID).ToList();
-                results.ForEach(x => options.Add(x.Answer));
+                var results = db.GetAllConnectedNodes(MessagesController.currentNode.ID).ToList();
+                MessagesController.options.Clear();
+                results.ForEach(x => MessagesController.options.Add(x.Answer));
                 foreach (var item in results)
                 {
                     Node2 n = new Node2();
                     n.ID = item.ID;
                     n.Question = item.Question;
                     n.Answer = item.Answer;
-                    nodeList.Add(n);
+                    MessagesController.nodeList.Add(n);
                 }
             }
 
             PromptDialog.Choice(
                 context: context,
                 resume: ResumeAndPromptPlatformAsync,
-                options: options.ToArray(),
-                prompt: "Welcome to Azure Support bot! " + currentNode.Question,
+                options: MessagesController.options.ToArray(),
+                prompt: "Welcome to Azure Support bot! " + MessagesController.currentNode.Question,
                 retry: "I didn't understand. Please try again.");
         }
 
         public async Task ResumeAndPromptPlatformAsync(IDialogContext context, IAwaitable<string> argument)
         {
             var message = await argument;
-            if(message=="Go Back")
+            
+            
+            //else if (message == "Continue") {}
+            if(!MessagesController.isBackOrStartOver)
             {
-                nodeSession.RemoveAt(nodeSession.Count - 1);
-                currentNode = nodeSession.Last();
-            }
-            else if(message=="Start Over")
-            {
-                currentNode = nodeSession.First();
-                nodeSession.RemoveRange(1, nodeSession.Count - 2);
-            }
-            else if (message == "Continue") {}
-            else
-            {
-                foreach (var node in nodeList)
+                foreach (var node in MessagesController.nodeList)
                 {
                     if (node.Answer == message)
-                        currentNode = node;
+                        MessagesController.currentNode = node;
                 }
-                nodeSession.Add(currentNode);
+                MessagesController.nodeSession.Add(MessagesController.currentNode);
             }
-            for (int i = 1; i < nodeSession.Count - 1; i++)
+            for (int i = 1; i < MessagesController.nodeSession.Count - 1; i++)
             {
-                if ((nodeSession[nodeSession.Count - 2] == nodeSession[i - 1] && currentNode.ID == nodeSession[i].ID) && nodeSession.IndexOf(nodeSession[nodeSession.Count - 2]) != nodeSession.IndexOf(nodeSession[i - 1]))
+                if ((MessagesController.nodeSession[MessagesController.nodeSession.Count - 2] == MessagesController.nodeSession[i - 1] && MessagesController.currentNode.ID == MessagesController.nodeSession[i].ID) && MessagesController.nodeSession.IndexOf(MessagesController.nodeSession[MessagesController.nodeSession.Count - 2]) != MessagesController.nodeSession.IndexOf(MessagesController.nodeSession[i - 1]))
                 {
                     PromptDialog.Choice(
                         context: context,
@@ -100,27 +93,27 @@ namespace ChatBot
 
             using (var db = new LeapChatBotDBEntities())
             {
-                var results = db.GetAllConnectedNodes(currentNode.ID).ToList();
+                var results = db.GetAllConnectedNodes(MessagesController.currentNode.ID).ToList();
 
-                nodeList.Clear();
-                options.Clear();
+                MessagesController.nodeList.Clear();
+                MessagesController.options.Clear();
                 foreach (var item in results)
                 {
                     Node2 n = new Node2();
                     n.ID = item.ID;
                     n.Question = item.Question;
                     n.Answer = item.Answer;
-                    nodeList.Add(n);
+                    MessagesController.nodeList.Add(n);
                 }
-                nodeList.ForEach(x => options.Add(x.Answer));
+                MessagesController.nodeList.ForEach(x => MessagesController.options.Add(x.Answer));
             }
-            if(nodeSession.Count>1)
-                options.Add("Go Back");
+            if(MessagesController.nodeSession.Count>1 && MessagesController.currentNode.ID!=1)
+                MessagesController.options.Add("Go Back");
             PromptDialog.Choice(
                 context: context,
                 resume: ResumeAndPromptPlatformAsync,
-                options: options.ToArray(),
-                prompt: currentNode.Question,
+                options: MessagesController.options.ToArray(),
+                prompt: MessagesController.currentNode.Question,
                 retry: "I didn't understand. Please try again.");
 
         }

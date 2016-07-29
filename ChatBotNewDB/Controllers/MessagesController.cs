@@ -10,26 +10,69 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Bot.Builder.Dialogs;
 using ChatBotNewDB;
+using System.Collections.Generic;
 
 namespace ChatBot
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+        public static Node2 currentNode = new Node2();
+        public static List<Node2> nodeList = new List<Node2>();
+        public static List<Node2> nodeSession = new List<Node2>();
+        public static List<string> options = new List<string>();
+        public static bool isBackOrStartOver;
+
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
             if (activity.Type == ActivityTypes.Message)
             {
-                if (activity.Text == "help")
+                isBackOrStartOver = false;
+                if (activity.Text.ToLower() == "go back" || activity.Text.ToLower() == "back")
                 {
-                    Activity reply = activity.CreateReply("You may type commands such as back, restart, human, or error code if you have a code to paste in. To return, select an answer from the previous message.'");
+                    nodeSession.RemoveAt(nodeSession.Count - 1);
+                    currentNode = nodeSession.Last();
+                    isBackOrStartOver = true;
+                }
+                else if (activity.Text.ToLower() == "start over")
+                {
+                    using (var db = new LeapChatBotDBEntities())
+                    {
+                        var getGreetingNode = from c in db.Node where c.ID == 1 select c;
+                        var newCurrentNode = getGreetingNode.ToArray()[0];
+                        currentNode.ID = newCurrentNode.ID;
+                        currentNode.Answer = newCurrentNode.Answer;
+                        currentNode.Question = newCurrentNode.Question;
+                    }
+                    nodeSession.Clear();
+                    nodeSession.Add(currentNode);
+                    activity.Text = nodeList[0].Answer;
+                    isBackOrStartOver = true;
+                }
+                else if (activity.Text=="1"|| activity.Text == "2" || activity.Text == "3" || activity.Text == "4" || activity.Text == "5" || activity.Text == "6" || activity.Text == "7" || activity.Text == "8")
+                {
+                    var option = int.Parse(activity.Text);
+                    if(option >= 1 && option <= nodeList.Count)
+                        activity.Text = nodeList[option-1].Answer;
+                    else if(option==nodeList.Count+1 && currentNode.ID != 1)
+                    {
+                        activity.Text = "Go Back";
+                        nodeSession.RemoveAt(nodeSession.Count - 1);
+                        currentNode = nodeSession.Last();
+                        isBackOrStartOver = true;
+                    }
+                }
+
+                if (activity.Text.ToLower() == "help")
+                {
+                    Activity reply = activity.CreateReply("You may type commands such as back, restart, human, or error code if you have a code to paste in. To return, type your answer to the previous question.");
                     await connector.Conversations.ReplyToActivityAsync(reply);
                 }
-                else if (activity.Text == "human")
+                else if (activity.Text.ToLower() == "human")
                 {
-                    Activity reply = activity.CreateReply("I'm sorry I couldn't help you solve your problem. You will be connected to a human momentarily.");
+                    Activity reply = activity.CreateReply("I'm sorry I couldn't help you solve your problem. Please call 1-855-463-6889 to speak with a human.");
                     await connector.Conversations.ReplyToActivityAsync(reply);
                 }
                 else
