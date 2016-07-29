@@ -24,8 +24,10 @@ d3.json("http://localhost:8000/api/nodes", function(data) {
 
 d3.json("http://localhost:8000/api/references", function(data) {
   for (var i = 0; i < data.length; ++i) {
-    links.push({ source: data[i].StartID - 1, target: data[i].EndID - 1, left: false, right: true });
+    links.push({ source: data[i].ParentID - 1, target: data[i].ChildID - 1, left: false, right: true });
   }
+  console.log(nodes);
+  console.log(data);
   restart();
 });
 
@@ -415,6 +417,7 @@ function getChildNodes(id){
   });
 
 }
+
 // app starts here
 svg.on('mousedown', mousedown)
   .on('mousemove', mousemove)

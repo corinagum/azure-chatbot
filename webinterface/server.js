@@ -14,10 +14,10 @@ app.listen(8000, function() {
     console.log("running on 8000");
 	// setup default connection to database on app load 
  	sql.setDefault({
-        user: "kabirkhan",
-        password: "azurechatbot123!",
-        host: "azurechatbot.database.windows.net",
-        database: "Test",
+        user: "leaper",
+        password: "SecAu!h2123",
+        host: "leapchatbot.database.windows.net",
+        database: "LeapChatBotDB",
         options: {
             encrypt: true // Use this if you're on Windows Azure 
         }

@@ -6,12 +6,12 @@ module.exports = {
   index: function (req, res) {
     sql.execute({
         name: "selectFromNode",
-        preparedSql: "SELECT * FROM Node",
+        preparedSql: "SELECT TOP(114) * FROM Node",
     }).then( function (data) {       
         res.json(data);
     }, function (err) {
         console.log( err );
-    });
+    })
   },
 
   // Create a new node 
