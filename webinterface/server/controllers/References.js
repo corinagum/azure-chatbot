@@ -21,16 +21,20 @@ module.exports = {
       sql.execute({
           procedure: "AddReference",
           params: {
-              parentID: {
+              PreviousID: {
                   type: sql.INT,
-                  val: req.params.parentID
+                  val: req.body.parentID
               },
-              chileID: {
+              NewID: {
                   type: sql.INT,
-                  val: req.params.childID
+                  val: req.body.childID
               } 
           }
-      })
+      }).then( function (data) {       
+        res.redirect('/');
+      }, function (err) {
+        console.log( err );
+      });
   },
   
   // Remove a reference
@@ -47,6 +51,10 @@ module.exports = {
                   val: req.params.childID
               }        
           }
-      })
+      }).then( function (data) {       
+        res.redirect('/');
+      }, function (err) {
+        console.log( err );
+      });
   }
 }

@@ -16,6 +16,8 @@ module.exports = {
 
   // Create a new node 
   create: function (req, res) {
+    console.log("Request body");
+    console.log(req.body);
     sql.execute({
         name: "createOrphanedNode",
         preparedSql: "INSERT INTO Node(ID, Answer, Question)\
@@ -34,7 +36,11 @@ module.exports = {
                 val: req.body.question
             }
         }
-    })
+    }).then( function (data) {       
+        res.redirect('/');
+    }, function (err) {
+        console.log( err );
+    });
   },
 
   // Update information about a node

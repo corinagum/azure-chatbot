@@ -7,6 +7,8 @@ var bodyParser = require("body-parser");
 var path = require("path"); 
 
 app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname,  "./client"))); 
 var route_setter = require("./server/config/routes.js"); 
 route_setter(app); 
