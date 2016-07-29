@@ -2,11 +2,32 @@
 var width  = 900,
     height = 600,
     colors = d3.scale.category10();
+
+var zoom = d3.behavior.zoom()
+    .translate([0, 0])
+    .scale(1)
+    .scaleExtent([1 / 2, 8])
+    .on("zoom", zoomed);
+
 var svg = d3.select('#svg_div')
   .append('svg')
   .attr('oncontextmenu', 'return false;')
   .attr('width', width)
-  .attr('height', height);
+  .attr('height', height)
+  .append("g")
+  .call(zoom);
+
+var rect = svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .style("fill", "#fff")
+  ;
+
+function zoomed(){
+    console.log("translate: ",d3.event.translate);
+    console.log("scale: ", d3.event.scale);
+    svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
 
 var nodes = [];
 var links = [];
