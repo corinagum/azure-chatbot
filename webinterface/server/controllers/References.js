@@ -7,7 +7,13 @@ module.exports = {
     sql.execute( {
         name: "selectFromReference",
         preparedSql: "SELECT ParentID, ChildID FROM Reference",
+<<<<<<< HEAD
     }).then( function( data ) { 
+=======
+    }).then( function( data ) {
+        console.log("Got It!");
+        console.log(data);
+>>>>>>> ced17249e05315dec40650f00c6c9f955c1c267c
         res.json(data);
     }, function( err ) {
         console.log( err );

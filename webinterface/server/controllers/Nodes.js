@@ -12,7 +12,7 @@ module.exports = {
         res.json(data);
     }, function (err) {
         console.log( err );
-    });
+    })
   },
 
   // Create a new node 
