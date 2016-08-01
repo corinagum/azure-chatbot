@@ -6,8 +6,8 @@ module.exports = {
   index: function(req, res) {
     sql.execute( {
         name: "selectFromReference",
-        preparedSql: "SELECT StartID, EndID FROM Reference",
-    }).then( function( data ) {      
+        preparedSql: "SELECT ParentID, ChildID FROM Reference",
+    }).then( function( data ) { 
         res.json(data);
     }, function( err ) {
         console.log( err );

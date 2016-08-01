@@ -37,25 +37,42 @@ var didSelectNode = false;
 d3.json("http://localhost:8000/api/nodes", function(data) {
     for (var idx in data) {
         var row = data[idx];
-        nodes.push({ id: row.ID, reflexive: true, question: row.Question, answer: row.Answer });
+        var newNode = { id: row.ID, reflexive: true, question: row.Question, answer: row.Answer }
+        nodes.push(newNode);
     }
     lastNodeId = nodes[nodes.length - 1].id;
     restart();
 });
 
-d3.json("http://localhost:8000/api/references", function(data) {
-  for (var i = 0; i < data.length; ++i) {
-    links.push({ source: data[i].StartID - 1, target: data[i].EndID - 1, left: false, right: true });
-  }
+d3.json("http://localhost:8000/api/references", function(data) {  
+  createLinks(data);
   restart();
 });
+
+// Create all links between nodes based on ids from references table
+function createLinks(refs) {
+  for (var i = 0; i < refs.length; i++) {
+    var newLink = { left: false, right: true };
+    newLink.source = findNodeWithID(refs[i].ParentID);
+    newLink.target = findNodeWithID(refs[i].ChildID);
+    links.push(newLink)
+  }
+}
+
+function findNodeWithID(id) {
+  for (var k = 0; k < nodes.length; k++) {
+    if (nodes[k].id === id) {
+      return nodes[k];
+    }
+  }
+}
 
 // init D3 force layout
 var force = d3.layout.force()
     .nodes(nodes)
     .links(links)
     .size([width, height])
-    .linkDistance(50)
+    .linkDistance(150)
     .charge(-150)
     .on('tick', tick)
 
