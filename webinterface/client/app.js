@@ -43,17 +43,8 @@ d3.json("http://localhost:8000/api/nodes", function(data) {
     lastNodeId = nodes[nodes.length - 1].id;
     restart();
 });
-
-<<<<<<< HEAD
 d3.json("http://localhost:8000/api/references", function(data) {  
   createLinks(data);
-=======
-d3.json("http://localhost:8000/api/references", function(data) {
-  // for (var i = 0; i < data.length; ++i) {
-  //   links.push({ source: data[i].ParentID - 1, target: data[i].ChildID - 1, left: false, right: true });
-  // }
->>>>>>> ced17249e05315dec40650f00c6c9f955c1c267c
-  restart();
 });
 
 // Create all links between nodes based on ids from references table
