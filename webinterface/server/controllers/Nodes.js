@@ -8,7 +8,6 @@ module.exports = {
         name: "selectFromNode",
         preparedSql: "SELECT ID, Answer, Question FROM Node",
     }).then( function (data) {   
-        console.log(data);    
         res.json(data);
     }, function (err) {
         console.log( err );
