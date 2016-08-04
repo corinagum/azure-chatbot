@@ -21,9 +21,18 @@ app.listen(8000, function() {
         host: "leapchatbot.database.windows.net",
         database: "LeapChatBotDB",
         options: {
-            encrypt: true // Use this if you're on Windows Azure 
+            encrypt: true  
         }
     }); 
+    // sql.setDefault({
+    //     user: "kabirkhan",
+    //     password: "azurechatbot123!",
+    //     host: "azurechatbot.database.windows.net",
+    //     database: "Test",
+    //     options: {
+    //         encrypt: true  
+    //     }
+    // });
 }); 
  
 
